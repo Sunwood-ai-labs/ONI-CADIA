@@ -32,6 +32,7 @@ export default defineConfig({
         nav: [
           { text: "Guide", link: "/guide/quickstart" },
           { text: "Country Simulation Guide", link: "/guide/agent-teams" },
+          { text: "Square Chronicle", link: "/guide/square-chronicle" },
           { text: "Configuration", link: "/guide/configuration" },
           { text: "Validation", link: "/guide/validation" },
           { text: "Releases", link: "/guide/releases" },
@@ -57,6 +58,13 @@ export default defineConfig({
               { text: "Launching v0.1.0", link: "/guide/articles/v0.1.0-launch" },
             ],
           },
+          {
+            text: "Square Chronicle",
+            items: [
+              { text: "Chronicle Index", link: "/guide/square-chronicle" },
+              { text: "2026-04-14 Daily Note", link: "/guide/square-chronicle/2026-04-14" },
+            ],
+          },
         ],
       },
     },
@@ -67,6 +75,7 @@ export default defineConfig({
         nav: [
           { text: "ガイド", link: "/ja/guide/quickstart" },
           { text: "国家シミュレーション", link: "/ja/guide/agent-teams" },
+          { text: "広場日報", link: "/ja/guide/square-chronicle" },
           { text: "設定", link: "/ja/guide/configuration" },
           { text: "検証", link: "/ja/guide/validation" },
           { text: "リリース", link: "/ja/guide/releases" },
@@ -90,6 +99,13 @@ export default defineConfig({
               { text: "v0.1.0 リリースノート", link: "/ja/guide/releases/v0.1.0" },
               { text: "記事一覧", link: "/ja/guide/articles" },
               { text: "v0.1.0 を公開", link: "/ja/guide/articles/v0.1.0-launch" },
+            ],
+          },
+          {
+            text: "広場日報",
+            items: [
+              { text: "日報インデックス", link: "/ja/guide/square-chronicle" },
+              { text: "2026-04-14 日報", link: "/ja/guide/square-chronicle/2026-04-14" },
             ],
           },
         ],
