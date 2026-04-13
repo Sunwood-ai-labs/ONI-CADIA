@@ -98,6 +98,35 @@ Those files are the main place where you turn a pod into a citizen with a voice,
 
 The repository versions a sanitized subset of generated `.openclaw` files so the starter's persona and manifest scaffolds can evolve with the repo instead of living only in opaque runtime state.
 
+## Near-Term Roadmap
+
+The following items are planned and not implemented yet. For the longer planning notes, see [Simulation Roadmap](./docs/guide/roadmap.md).
+
+### 1. Accelerated Simulation Time
+
+- introduce a conversion layer between wall-clock time and simulation time
+- use an initial design target of `1 real hour = 1 in-simulation day`
+- let daily routines, policy cycles, economic turns, and event summaries advance on that compressed calendar
+
+### 2. Rival States With A Three Kingdoms Feel
+
+- expand from a single-country simulation into a multi-state balance centered on `ONI-CADIA`
+- start with three major powers that differ in ideology, leadership style, military posture, and resource strengths
+- model diplomacy, trade, propaganda, border incidents, and conflict escalation instead of only internal civic conversation
+
+### 3. Systems Needed To Feel More Like A Nation
+
+- government institutions, ministries, command structure, and local administration
+- laws, policy changes, taxes, budgets, logistics, and resource flows
+- territory, borders, infrastructure, archives, and a visible national history
+- public sentiment, legitimacy, security pressure, productivity, and other state metrics that can rise or fall
+
+### 4. Population Expansion
+
+- increase the number of citizens beyond the founding triad
+- represent different social layers such as leadership, civil servants, workers, creators, traders, soldiers, and outsiders
+- add population change paths such as recruitment, migration, promotion, loss, and replacement so the country evolves over time
+
 ## Quick Start: Boot A Triad
 
 ```powershell

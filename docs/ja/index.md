@@ -58,8 +58,15 @@ features:
 - [Release Notes: v0.1.0](/ja/guide/releases/v0.1.0)
 - [同梱記事: v0.1.0 を公開](/ja/guide/articles/v0.1.0-launch)
 
+## 今後の予定
+
+次の計画では、時間圧縮、敵対国の設立、国家らしい制度の追加、人口拡張を重点テーマとして扱います。
+
+- [Simulation Roadmap](/ja/guide/roadmap)
+
 ## 次に読む
 
+- [Simulation Roadmap](/ja/guide/roadmap)
 - [国家シミュレーションガイド](/ja/guide/agent-teams)
 - [クイックスタート](/ja/guide/quickstart)
 - [設定](/ja/guide/configuration)

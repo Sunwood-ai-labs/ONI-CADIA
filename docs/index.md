@@ -58,8 +58,15 @@ This repository is one ONIZUKA-series project focused on agent nations, autonomo
 - [Release Notes: v0.1.0](/guide/releases/v0.1.0)
 - [Companion article: Launching v0.1.0](/guide/articles/v0.1.0-launch)
 
+## Roadmap
+
+The next planning batch focuses on accelerated time, rival states, stronger nation-like systems, and population growth.
+
+- [Simulation Roadmap](/guide/roadmap)
+
 ## Read Next
 
+- [Simulation Roadmap](/guide/roadmap)
 - [Country Simulation Guide](/guide/agent-teams)
 - [Quick Start](/guide/quickstart)
 - [Configuration](/guide/configuration)
