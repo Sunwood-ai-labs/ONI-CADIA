@@ -6,7 +6,7 @@ const base = "/ONI-CADIA/";
 export default defineConfig({
   title: "ONI-CADIA",
   description:
-    "Windows-first ONIZUKA-series starter for autonomous OpenClaw teams with isolated runtimes, role scaffolds, and a local Mattermost coordination lab.",
+    "AGI-country simulator where OpenClaw citizens live inside ONI-CADIA, with Podman-isolated runtimes, civic persona scaffolds, and a local Mattermost public square.",
   lang: "en-US",
   base,
   cleanUrls: true,
@@ -31,7 +31,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Guide", link: "/guide/quickstart" },
-          { text: "Autonomous Team Guide", link: "/guide/agent-teams" },
+          { text: "Country Simulation Guide", link: "/guide/agent-teams" },
           { text: "Configuration", link: "/guide/configuration" },
           { text: "Validation", link: "/guide/validation" },
           { text: "Releases", link: "/guide/releases" },
@@ -43,7 +43,7 @@ export default defineConfig({
             text: "Guide",
             items: [
               { text: "Quick Start", link: "/guide/quickstart" },
-              { text: "Autonomous Team Guide", link: "/guide/agent-teams" },
+              { text: "Country Simulation Guide", link: "/guide/agent-teams" },
               { text: "Configuration", link: "/guide/configuration" },
               { text: "Validation", link: "/guide/validation" },
             ],
@@ -66,7 +66,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "ガイド", link: "/ja/guide/quickstart" },
-          { text: "自律チーム", link: "/ja/guide/agent-teams" },
+          { text: "国家シミュレーション", link: "/ja/guide/agent-teams" },
           { text: "設定", link: "/ja/guide/configuration" },
           { text: "検証", link: "/ja/guide/validation" },
           { text: "リリース", link: "/ja/guide/releases" },
@@ -78,7 +78,7 @@ export default defineConfig({
             text: "ガイド",
             items: [
               { text: "クイックスタート", link: "/ja/guide/quickstart" },
-              { text: "自律チームガイド", link: "/ja/guide/agent-teams" },
+              { text: "国家シミュレーションガイド", link: "/ja/guide/agent-teams" },
               { text: "設定", link: "/ja/guide/configuration" },
               { text: "検証", link: "/ja/guide/validation" },
             ],

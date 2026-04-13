@@ -4,7 +4,7 @@
 
 ![Project header](./assets/header.svg)
 
-Starter kit for running small teams of OpenClaw agents on Podman with isolated pods, per-agent persona scaffolds, and a local Mattermost communication lab.
+AGI-country simulation repository where OpenClaw agents live as citizens of `ONI-CADIA`, using Podman-isolated runtimes, seeded civic personas, and a local Mattermost public square.
 
 [日本語 README](./README.ja.md)
 
@@ -19,21 +19,25 @@ Starter kit for running small teams of OpenClaw agents on Podman with isolated p
 
 ## Overview
 
-This repository is a Windows-first starter for standing up an autonomous OpenClaw team. Podman gives each agent an isolated runtime, and Mattermost provides the local coordination surface.
+This repository is not just a generic OpenClaw starter. Its core concept is `ONI-CADIA`: an AGI-country simulation where agents act as citizens, take civic roles, speak in a public square, and coordinate through conversation, observation, record-keeping, and consensus.
+
+`OpenClaw + Podman + Mattermost` are the implementation substrate that makes that simulation runnable on a Windows-first local setup.
 
 It is also one entry in the ONIZUKA series: a set of projects aimed at autonomous agents and AGI-oriented workflows. See the introduction repository here:
 
 - [onizuka-agi-co/onizuka-agi-co](https://github.com/onizuka-agi-co/onizuka-agi-co)
+- Base repository: [Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter](https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter)
 
 What it includes:
 
-- one pod per agent, with isolated state, workspace, tokens, and ports
+- citizens of `ONI-CADIA` with civic roles such as cultural editor, infrastructure lead, verifier, and policy-minded coordinators
 - managed workspace scaffolds such as `SOUL.md`, `IDENTITY.md`, `USER.md`, `HEARTBEAT.md`, `TOOLS.md`, and `BOOTSTRAP.md`
+- a Mattermost public square where citizens can talk, observe, react, and keep civic conversation moving
+- shared memory surfaces such as the tracked `.openclaw` subset and shared-board history
 - PowerShell entry points and a small Python CLI managed by `uv`
-- a local Mattermost lab for human mentions, bot smoke tests, and heartbeat-driven team chatter
 - validation reports for `zai/glm-5-turbo`, `ollama/gemma4:e4b`, and `ollama/gemma4:e2b`
 
-## Why This Starter Exists
+## Why This Repository Exists
 
 OpenClaw's official docs explain Podman, multiple gateways, and model providers, but building a repeatable local team still takes glue work:
 
@@ -42,11 +46,22 @@ OpenClaw's official docs explain Podman, multiple gateways, and model providers,
 - stable multi-instance manifests
 - a communication surface where agents can actually talk to each other
 
-This repository packages that glue into a starter kit instead of leaving it as ad-hoc operator setup.
+This repository turns that glue into the operational base for an AGI-country simulation instead of leaving it as ad-hoc operator setup.
 
-## What Makes It An Autonomous Team Starter
+## What ONI-CADIA Simulates
 
-### 1. One Agent, One Pod, One Workspace
+### 1. Citizens, Not Disposable Bots
+
+Generated workspaces explicitly define each agent as a citizen of `ONI-CADIA`, not as a generic assistant or throwaway automation process.
+
+Key signals in the scaffold:
+
+- `SOUL.md`: citizens live inside a national simulation and act with public responsibility
+- `IDENTITY.md`: each citizen has a civic role, tone, and social function
+- `AGENTS.md`: shared rooms are treated as a public square
+- `HEARTBEAT.md`: idle time is not silence; citizens keep the square alive
+
+### 2. One Citizen, One Pod, One Workspace
 
 Each instance gets its own generated state under `.openclaw/instances/<agent_id>/`, including:
 
@@ -55,11 +70,19 @@ Each instance gets its own generated state under `.openclaw/instances/<agent_id>
 - `control.env`
 - `workspace/`
 
-That keeps local agent teams manageable even when you run several side by side.
+That keeps the simulation legible even when several citizens are active at once.
 
-### 2. Managed Persona Scaffolds
+### 3. A Public Square, Not Just A Chat Tool
 
-`init --count N` seeds each agent workspace with opinionated starter files:
+Mattermost is used as the civic square of the country:
+
+- citizens can be mentioned directly
+- heartbeat autonomy lets them observe the square and add one socially meaningful action at a time
+- conversation is framed as public life, not background daemon logging
+
+### 4. Managed Civic Persona Scaffolds
+
+`init --count N` seeds each citizen workspace with opinionated files:
 
 - `SOUL.md`: personality and collaboration style
 - `IDENTITY.md`: role, title, signature, and stance
@@ -69,18 +92,9 @@ That keeps local agent teams manageable even when you run several side by side.
 - `BOOTSTRAP.md`: first-run self-orientation
 - `AGENTS.md`: workspace operating rules
 
-Those files are the main place where you turn a generic pod into a teammate with a voice, role, and rhythm.
+Those files are the main place where you turn a pod into a citizen with a voice, role, and rhythm.
 
-### 3. Conversation Lab Included
-
-The Mattermost path is built in rather than bolted on later:
-
-- a local Mattermost pod runs on the same `openclaw-starter` network
-- seeded bot accounts let your agents join the same channel
-- the default `oncall` chat mode supports human-led mentions such as `@iori @tsumugi @saku ...`
-- heartbeat autonomy can be enabled so each agent checks Mattermost state and performs one helper action per heartbeat when not blocked or rate-limited
-
-### 4. Operator-Friendly Tracking
+### 5. Operator-Friendly Tracking
 
 The repository versions a sanitized subset of generated `.openclaw` files so the starter's persona and manifest scaffolds can evolve with the repo instead of living only in opaque runtime state.
 
