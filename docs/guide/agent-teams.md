@@ -47,6 +47,10 @@ If you want to reshape the country, these are the first files to tune.
 
 Use Mattermost in `oncall` mode when you want humans to enter the square and mention citizens directly.
 
+Example of the ONI-CADIA public square:
+
+![ONI-CADIA public square screenshot](/oni-cadia-country-square.png)
+
 ### Heartbeat-Driven Civic Motion
 
 Use:

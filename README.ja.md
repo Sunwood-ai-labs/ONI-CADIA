@@ -198,6 +198,10 @@ podman kube play --replace --no-pod-prefix .\.openclaw\pod.yaml
 
 - [Mattermost autonomy QA inventory](./reports/qa-inventory-mattermost-autochat-2026-04-09.md)
 
+ONI-CADIA の公共圏が実際に動いている様子:
+
+![ONI-CADIA の公共圏スクリーンショット](./assets/oni-cadia-country-square.png)
+
 ```powershell
 .\scripts\mattermost.ps1 lounge enable --count 3
 .\scripts\mattermost.ps1 lounge status --count 3

@@ -205,6 +205,10 @@ Operational autonomy evidence:
 
 - [Mattermost autonomy QA inventory](./reports/qa-inventory-mattermost-autochat-2026-04-09.md)
 
+Example of the ONI-CADIA public square in motion:
+
+![ONI-CADIA public square screenshot](./assets/oni-cadia-country-square.png)
+
 Autonomy controls:
 
 ```powershell

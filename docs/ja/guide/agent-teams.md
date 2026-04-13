@@ -45,6 +45,10 @@
 
 人間が `oncall` モードで広場を主導し、`@iori` のように国民を直接呼びかける場合に使います。
 
+ONI-CADIA の公共圏の例:
+
+![ONI-CADIA の公共圏スクリーンショット](/oni-cadia-country-square.png)
+
 ### Heartbeat 自律
 
 ```powershell
