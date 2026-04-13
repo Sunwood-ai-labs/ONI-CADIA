@@ -55,7 +55,7 @@
       {
         "name": "openclaw-state",
         "hostPath": {
-          "path": "/mnt/d/Prj/openclaw-podman-starter/.openclaw/instances/agent_003",
+          "path": "/mnt/d/Prj/ARCADIA/.openclaw/instances/agent_003",
           "type": "DirectoryOrCreate"
         }
       }

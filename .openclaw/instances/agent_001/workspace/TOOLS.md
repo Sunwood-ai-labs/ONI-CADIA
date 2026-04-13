@@ -9,8 +9,8 @@
 - Model: `zai/glm-5.1`
 - Gateway: `http://127.0.0.1:18789/`
 - Bridge: `http://127.0.0.1:18790/`
-- Workspace: `D:\Prj\openclaw-podman-starter\.openclaw\instances\agent_001\workspace`
-- Config dir: `D:\Prj\openclaw-podman-starter\.openclaw\instances\agent_001`
+- Workspace: `D:\Prj\ARCADIA\.openclaw\instances\agent_001\workspace`
+- Config dir: `D:\Prj\ARCADIA\.openclaw\instances\agent_001`
 - Mattermost lounge scripts: `/home/node/.openclaw/mattermost-tools`
 
 ## 実務メモ

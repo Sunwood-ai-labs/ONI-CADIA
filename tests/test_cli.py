@@ -120,6 +120,45 @@ class CliTests(unittest.TestCase):
     def test_mattermost_get_state_module_exposes_main(self) -> None:
         self.assertTrue(hasattr(mattermost_get_state, "main"))
 
+    def test_load_mattermost_runtime_resolves_bot_token_from_state_env(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            temp_root = Path(tmp)
+            control_env = temp_root / "control.env"
+            state_env = temp_root / ".env"
+            openclaw_json = temp_root / "openclaw.json"
+
+            control_env.write_text(
+                "\n".join(
+                    [
+                        "OPENCLAW_MATTERMOST_BASE_URL=http://mattermost:8065",
+                        "",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            state_env.write_text("OPENCLAW_MATTERMOST_BOT_TOKEN=test-bot-token\n", encoding="utf-8")
+            openclaw_json.write_text(
+                json.dumps(
+                    {
+                        "channels": {
+                            "mattermost": {
+                                "baseUrl": "http://mattermost:8065",
+                                "botToken": "${OPENCLAW_MATTERMOST_BOT_TOKEN}",
+                            }
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            with mock.patch.object(mattermost_common_runtime, "CONTROL_ENV_PATH", control_env), mock.patch.object(
+                mattermost_common_runtime, "STATE_ENV_PATH", state_env
+            ), mock.patch.object(mattermost_common_runtime, "OPENCLAW_CONFIG_PATH", openclaw_json):
+                base_url, bot_token = mattermost_common_runtime.load_mattermost_runtime()
+
+            self.assertEqual(base_url, "http://mattermost:8065")
+            self.assertEqual(bot_token, "test-bot-token")
+
     def test_scaled_instance_state_seeds_triads_and_mattermost_tools(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             temp_root = Path(tmp)
@@ -149,7 +188,12 @@ class CliTests(unittest.TestCase):
                 tools_text = tools_path.read_text(encoding="utf-8")
 
                 self.assertIn(f"# SOUL.md - {name}", soul_text)
+                self.assertIn("ARCADIA", soul_text)
+                self.assertIn("本物の人間", soul_text)
+                self.assertIn("知的生命体", soul_text)
                 self.assertIn(f"**名前:** {name}", identity_text)
+                self.assertIn("**国家:** ARCADIA", identity_text)
+                self.assertIn("**知性:** 知的生命体", identity_text)
                 self.assertIn(cli.CONTAINER_MATTERMOST_TOOLS_DIR, tools_text)
 
     def test_scaled_instance_manifest_no_longer_mounts_shared_board(self) -> None:
@@ -423,6 +467,47 @@ class CliTests(unittest.TestCase):
             self.assertNotIn("models", payload["agents"]["defaults"])
             self.assertNotIn("models", payload)
 
+    def test_apply_instance_model_overrides_clears_global_fallbacks_for_google_instance(self) -> None:
+        overrides = cli.apply_instance_model_overrides(
+            {
+                "OPENCLAW_MODEL_REF": "zai/glm-5.1",
+                "OPENCLAW_MODEL_FALLBACKS": "zai/glm-5-turbo,zai/glm-5,zai/glm-4.7",
+                "OPENCLAW_MODEL_REF_INSTANCE_004": "google/gemma-4-31b-it",
+            },
+            4,
+        )
+
+        self.assertEqual(overrides["OPENCLAW_MODEL_REF"], "google/gemma-4-31b-it")
+        self.assertEqual(overrides["OPENCLAW_MODEL_FALLBACKS"], "")
+
+    def test_ensure_openclaw_config_supports_nvidia_model_ref(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            temp_root = Path(tmp)
+            env_file = temp_root / ".env"
+            write_env_file(env_file)
+            env_text = env_file.read_text(encoding="utf-8")
+            env_text += "\n".join(
+                [
+                    "OPENCLAW_MODEL_REF=nvidia/moonshotai/kimi-k2-thinking",
+                    "OPENCLAW_MODEL_FALLBACKS=",
+                    "OPENCLAW_NVIDIA_BASE_URL=https://integrate.api.nvidia.com/v1",
+                    "NVIDIA_API_KEY=test-nvidia-key",
+                    "",
+                ]
+            )
+            env_file.write_text(env_text, encoding="utf-8")
+
+            cfg = cli.ensure_state(cli.load_config(env_file))
+            payload = json.loads((cfg.config_dir / "openclaw.json").read_text(encoding="utf-8"))
+
+            self.assertEqual(payload["agents"]["defaults"]["model"]["primary"], "nvidia/moonshotai/kimi-k2-thinking")
+            self.assertNotIn("fallbacks", payload["agents"]["defaults"]["model"])
+            self.assertEqual(payload["models"]["providers"]["nvidia"]["api"], "openai-completions")
+            self.assertEqual(payload["models"]["providers"]["nvidia"]["baseUrl"], "https://integrate.api.nvidia.com/v1")
+            self.assertEqual(payload["models"]["providers"]["nvidia"]["apiKey"], "${NVIDIA_API_KEY}")
+            self.assertEqual(payload["models"]["providers"]["nvidia"]["models"][0]["id"], "moonshotai/kimi-k2-thinking")
+            self.assertEqual(payload["plugins"]["entries"]["nvidia"]["enabled"], True)
+
     def test_ensure_openclaw_config_syncs_managed_agent_models_to_primary(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             temp_root = Path(tmp)
@@ -508,6 +593,9 @@ class CliTests(unittest.TestCase):
         self.assertEqual(cli.mattermost_persona_username(1), "iori")
         self.assertEqual(cli.mattermost_persona_username(2), "tsumugi")
         self.assertEqual(cli.mattermost_persona_username(3), "saku")
+        self.assertEqual(cli.mattermost_persona_username(7), "kimi")
+        self.assertEqual(cli.mattermost_persona_username(8), "qwen")
+        self.assertEqual(cli.mattermost_persona_username(9), "minimax")
 
     def test_mattermost_persona_avatar_files_exist(self) -> None:
         self.assertEqual(cli.mattermost_persona_avatar_file(1).name, "iori.png")

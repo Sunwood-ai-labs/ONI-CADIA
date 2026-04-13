@@ -13,12 +13,14 @@ from urllib import request as urllib_request
 
 CONFIG_DIR = Path("/home/node/.openclaw")
 CONTROL_ENV_PATH = CONFIG_DIR / "control.env"
+STATE_ENV_PATH = CONFIG_DIR / ".env"
 OPENCLAW_CONFIG_PATH = CONFIG_DIR / "openclaw.json"
 DEFAULT_OLLAMA_BASE_URL = "http://host.containers.internal:11434"
 DEFAULT_OLLAMA_MODEL = "gemma4:e2b"
 DEFAULT_MODEL_REF = f"ollama/{DEFAULT_OLLAMA_MODEL}"
 DEFAULT_OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 DEFAULT_ZAI_BASE_URL = "https://api.z.ai/api/coding/paas/v4"
+DEFAULT_NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1"
 RATE_LIMIT_RETRY_COUNT = 10
 RATE_LIMIT_RETRY_BASE_DELAY_SECONDS = 5
 RATE_LIMIT_RETRY_MAX_DELAY_SECONDS = 30
@@ -30,6 +32,9 @@ HANDLES = {
     4: "ruri",
     5: "hibiki",
     6: "kanae",
+    7: "kimi",
+    8: "qwen",
+    9: "minimax",
 }
 
 CHANNEL_PREFIX = "triad-"
@@ -56,6 +61,12 @@ def parse_env_file(path: Path) -> dict[str, str]:
         key, value = line.split("=", 1)
         values[key.strip()] = value.strip()
     return values
+
+
+def runtime_env_values() -> dict[str, str]:
+    # Secrets such as bot tokens and provider API keys live in `.env`,
+    # while generated runtime defaults live in `control.env`.
+    return {**parse_env_file(STATE_ENV_PATH), **parse_env_file(CONTROL_ENV_PATH)}
 
 
 def resolved_model_ref(env: dict[str, str]) -> str:
@@ -87,6 +98,9 @@ def planner_runtime_from_env(env: dict[str, str]) -> dict[str, str]:
     elif provider == "zai":
         base_url = env.get("OPENCLAW_ZAI_BASE_URL", DEFAULT_ZAI_BASE_URL).strip() or DEFAULT_ZAI_BASE_URL
         api_key = env.get("ZAI_API_KEY", "").strip()
+    elif provider == "nvidia":
+        base_url = env.get("OPENCLAW_NVIDIA_BASE_URL", DEFAULT_NVIDIA_BASE_URL).strip() or DEFAULT_NVIDIA_BASE_URL
+        api_key = env.get("NVIDIA_API_KEY", "").strip()
     else:
         base_url = ""
         api_key = ""
@@ -100,7 +114,7 @@ def planner_runtime_from_env(env: dict[str, str]) -> dict[str, str]:
 
 
 def load_control_values() -> dict[str, str]:
-    env = parse_env_file(CONTROL_ENV_PATH)
+    env = runtime_env_values()
     runtime = planner_runtime_from_env(env)
     return {
         "team_name": env.get("OPENCLAW_MATTERMOST_TEAM_NAME", "openclaw").strip() or "openclaw",
@@ -130,7 +144,7 @@ def load_mattermost_runtime() -> tuple[str, str]:
     mattermost = channels.get("mattermost")
     if not isinstance(mattermost, dict):
         raise RuntimeError("OpenClaw config is missing channels.mattermost")
-    control_env = {**os.environ, **parse_env_file(CONTROL_ENV_PATH)}
+    control_env = {**os.environ, **runtime_env_values()}
     base_url = resolve_env_placeholders(str(mattermost.get("baseUrl", "")), control_env).strip()
     bot_token = resolve_env_placeholders(str(mattermost.get("botToken", "")), control_env).strip()
     if not base_url or not bot_token:

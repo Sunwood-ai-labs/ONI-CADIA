@@ -9,8 +9,8 @@
 - Model: `google/gemma-3-27b-it`
 - Gateway: `http://127.0.0.1:18797/`
 - Bridge: `http://127.0.0.1:18798/`
-- Workspace: `D:\Prj\openclaw-podman-starter\.openclaw\instances\agent_005\workspace`
-- Config dir: `D:\Prj\openclaw-podman-starter\.openclaw\instances\agent_005`
+- Workspace: `D:\Prj\ARCADIA\.openclaw\instances\agent_005\workspace`
+- Config dir: `D:\Prj\ARCADIA\.openclaw\instances\agent_005`
 - Mattermost lounge scripts: `/home/node/.openclaw/mattermost-tools`
 
 ## 実務メモ

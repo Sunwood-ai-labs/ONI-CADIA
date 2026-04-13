@@ -3,12 +3,7 @@
     "defaults": {
       "workspace": "/home/node/.openclaw/workspace",
       "model": {
-        "primary": "google/gemma-4-31b-it",
-        "fallbacks": [
-          "zai/glm-5-turbo",
-          "zai/glm-5",
-          "zai/glm-4.7"
-        ]
+        "primary": "google/gemma-4-31b-it"
       },
       "sandbox": {
         "mode": "off"
@@ -97,6 +92,7 @@
     "providers": {
       "google": {
         "api": "google-generative-ai",
+        "baseUrl": "https://generativelanguage.googleapis.com",
         "apiKey": "${GEMINI_API_KEY}",
         "models": [
           {
@@ -114,41 +110,8 @@
             },
             "contextWindow": 131072,
             "maxTokens": 1310720
-          },
-          {
-            "id": "gemma-4-26b-a4b-it",
-            "name": "Gemma 4 26B A4B It",
-            "reasoning": false,
-            "input": [
-              "text"
-            ],
-            "cost": {
-              "input": 0,
-              "output": 0,
-              "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "contextWindow": 131072,
-            "maxTokens": 1310720
-          },
-          {
-            "id": "gemma-3-27b-it",
-            "name": "Gemma 3 27B It",
-            "reasoning": false,
-            "input": [
-              "text"
-            ],
-            "cost": {
-              "input": 0,
-              "output": 0,
-              "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "contextWindow": 131072,
-            "maxTokens": 1310720
           }
-        ],
-        "baseUrl": "https://generativelanguage.googleapis.com"
+        ]
       }
     }
   }
