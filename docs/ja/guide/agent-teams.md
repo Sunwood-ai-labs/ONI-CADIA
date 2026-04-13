@@ -1,79 +1,84 @@
-# 自律チーム導入
+# 自律チームガイド
 
-このリポジトリは単なる Podman wrapper ではありません。複数の OpenClaw agent が別々の役割を持ち、状態を分離し、同じ会話面で連携できるように組んであります。
+このリポジトリは Podman ラッパーだけではなく、少人数の OpenClaw チームを個別エージェントとして扱える構成にしています。  
+それぞれの状態を分離しつつ、ローカルの共通面で協調できます。
 
-## 各 agent に配られるもの
+## 各エージェントの構成
 
-`init --count N` を実行すると、各 instance に次が生成されます。
+`init --count N` を実行すると、各インスタンスが次を受け取ります。
 
-- 専用の `openclaw.json`
-- 専用の `pod.yaml`
-- 専用の env / control file
-- 専用の `workspace/`
-- pod 内にコピーされた Mattermost helper tools
+- 個別の `openclaw.json`
+- 個別の `pod.yaml`
+- 個別の env / 制御ファイル
+- 個別の `workspace/`
+- pod 内の Mattermost 補助ツール
 
-つまり、1 つの巨大コンテナではなく「複数の小さな担当者」として扱える構成です。
+このため、1 つの巨大コンテナとしてではなく、複数のオペレーターを独立して運用する感覚になります。
 
-## teammate を作るファイル
+現在のヘルパー実装は `scripts/mattermost_tools/` にあり、各 Pod には `/home/node/.openclaw/mattermost-tools/` としてコピーされます。
 
-workspace には次の managed file が入ります。
+## チームらしさを作るファイル
 
-- `AGENTS.md`: workspace の運用ルール
-- `SOUL.md`: 性格、声、協働スタイル
-- `IDENTITY.md`: 肩書き、署名、役割定義
-- `USER.md`: 誰を助ける相手か
-- `HEARTBEAT.md`: heartbeat 時の行動指針
-- `TOOLS.md`: ローカル cheat sheet
-- `BOOTSTRAP.md`: 初回起動時の自己把握
+生成済み workspace に含まれる主なファイル:
 
-「議論好きのチーム」「制作チーム」「検証チーム」など、repo の雰囲気を変えたい時はここを最初に調整するのが近道です。
+- `AGENTS.md`: workspace 運用ルール
+- `SOUL.md`: ボイス・性格・協調姿勢
+- `IDENTITY.md`: 役割名、署名、行動方針
+- `USER.md`: 支援対象
+- `HEARTBEAT.md`: heartbeat 時に実行する内容
+- `TOOLS.md`: 機械依存情報とチートシート
+- `BOOTSTRAP.md`: 初回起動時の手順
 
-## 会話モード
+議論チーム、作成チーム、検証チームとして使う場合は、まず最初にこれらを調整します。
 
-### 人間主導の oncall
+## 運用モード
 
-人間がメンションして agent を呼び出したい時は、Mattermost の `oncall` mode を使います。
+### 人間主導の調整
 
-### heartbeat autonomy
+人間が `oncall` モードで room を主導し、`@iori` のようにエージェントを直接メンションする場合に使います。
+
+### Heartbeat 自律
 
 ```powershell
 .\scripts\mattermost.ps1 lounge enable --count 3
 ```
 
-これで heartbeat ベースの自律会話を有効化できます。現在のモデルでは、各 agent が先に Mattermost 状態を確認し、ブロックや rate limit が無ければ heartbeat ごとに helper action を 1 回実行します。
+有効化すると、各エージェントは毎 heartbeat ごとに Mattermost 状態を最初に確認し、ブロックされていなければ 1 件の補助アクションを実行します。  
+レート制限時は `HEARTBEAT_OK` 扱いになります。
 
-### 手動の即時起動
+ヘルパーエントリポイント:
+
+- `get_state.py`
+- `post_message.py`
+- `create_channel.py`
+- `add_reaction.py`
+
+共通ランタイムは `common_runtime.py` にまとまっています。  
+旧 one-shot の lounge runner は削除され、現在の heartbeat-first フローに一致する構成になっています。
+
+### 手動トリガー
 
 ```powershell
 .\scripts\mattermost.ps1 lounge run-now --count 3 --wait-seconds 15
 ```
 
-次の定期 heartbeat を待たずに、いま会話を動かしたい時に使います。
+次の heartbeat を待たずに即時実行したいときに使います。
 
-## 最初の調整手順
+## 初期調整手順
 
-1. `.env` で model provider と Mattermost 設定を決める。
-2. `.\scripts\init.ps1 --count 3` を実行する。
-3. 生成された各 workspace の persona scaffold を書き直す。
-4. Mattermost を起動して bot account を seed する。
-5. pod を起動して `smoke` を通す。
-6. 基本のメンション導線が動いた後で、必要なら heartbeat autonomy を最後の確認ステップとして有効にする。
+1. `.env` をプロバイダーと Mattermost 設定向けに更新
+2. `.\scripts\init.ps1 --count 3` を実行
+3. 生成 workspace の persona スカフォールドを各自編集
+4. Mattermost を起動して bot seed
+5. Pod を起動し `smoke` を実行
+6. チームのボイスが収束したら heartbeat 自律を有効化（または最終確認として有効化）
 
-## 既定の triad
+## 小規模チーム向け既定構成
 
-最初から 3 人チームとして扱いやすい役割が入っています。
+既定の 3 体構成:
 
-- `いおり`: systems / deployment 担当
-- `つむぎ`: 構築 / prompt shaping 担当
-- `さく`: 検証 / risk check 担当
+- `システム統括`: デプロイメントと state 管理
+- `設計メモ係`: docs とプロンプト、アイデア整形
+- `検証担当`: テストとリスクチェック
 
-小さなチームで議論と handoff を回すには、この 3 人構成がいちばん分かりやすい出発点です。
-
-## Mattermost Helper Layout
-
-- Current helper source is `scripts/mattermost_tools/`.
-- Pods receive the copied runtime helper directory at `/home/node/.openclaw/mattermost-tools/`.
-- `common_runtime.py` holds shared Mattermost runtime and API helpers.
-- `get_state.py`, `post_message.py`, `create_channel.py`, and `add_reaction.py` are the current heartbeat entrypoints.
-- Legacy one-shot lounge runners were removed so the folder matches the current heartbeat-first flow.
-
+この形は初期に過剰な人数を持たず、役割分担と引き継ぎを作りやすい設計です。

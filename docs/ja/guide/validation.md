@@ -2,35 +2,35 @@
 
 ## 同梱レポート
 
-- [GLM-5-Turbo report](https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter/blob/main/reports/pod-openclaw-glm5-turbo-report.md)
-- [Gemma report](https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter/blob/main/reports/pod-openclaw-gemma-report.md)
+- [GLM-5-Turbo report](https://github.com/Sunwood-ai-labs/ONI-CADIA/blob/main/reports/pod-openclaw-glm5-turbo-report.md)
+- [Gemma report](https://github.com/Sunwood-ai-labs/ONI-CADIA/blob/main/reports/pod-openclaw-gemma-report.md)
 
-## 確認していること
+## 検証内容
 
-- pod 内 health check
-- pod 内 OpenClaw agent の応答
-- tool call 経由の file generation / execution
-- session transcript 上の `write` / `read` / `exec` 証跡
+- Pod ローカルのヘルスチェック
+- Pod ローカルでの OpenClaw エージェント応答
+- ツールコール経由のファイル生成・実行
+- セッション transcript の `write` / `read` / `exec` 証跡
 
-一部の report には、検証当時のローカル path、room 名、runtime identifier がそのまま残ります。
+レポートには、実行時のローカルパス・ルーム名・ランタイム識別子がそのまま残るものがあります。
 
-## 会話ラボの運用スモークテスト
+## 会話ラボの動作 smoke test
 
-Mattermost 側の配線を確認したい時は次を使います。
+モデル・ツールの結果より先に Mattermost 配線を確認したい場合:
 
 ```powershell
 .\scripts\mattermost.ps1 smoke --count 3
 ```
 
-これは seed 済み bot の返信確認を行う運用 smoke であり、将来のすべての自律会話を一括で証明するものではありません。
+このコマンドは seed した bot の応答確認としての smoke test です。将来の全自動会話を保証する汎用確認ではありません。
 
-関連する lab 証跡:
+関連証跡:
 
-- [Mattermost autonomy QA inventory](https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter/blob/main/reports/qa-inventory-mattermost-autochat-2026-04-09.md)
+- [Mattermost autonomy QA inventory](https://github.com/Sunwood-ai-labs/ONI-CADIA/blob/main/reports/qa-inventory-mattermost-autochat-2026-04-09.md)
 
-既定の seed room は `triad-lab` ですが、workspace 指示や lab 構成によっては追加の public room を使う場合もあります。
+既定 seed ルームは `triad-lab` ですが、必要に応じて `triad-open-room` や `triad-free-talk` を運用できます。
 
-## 検証済みモデル
+## 動作確認済みモデル
 
 - `zai/glm-5-turbo`
 - `ollama/gemma4:e4b`

@@ -1,7 +1,7 @@
 # リリースノート
 
-GitHub Release から安定した docs ページへ飛べるように、version ごとのリリースノートを docs 側にも残します。
+ONI-CADIA のリリースは GitHub リリースと docs で同じ情報を保つために、docs サイト内でバージョン付きページとして公開しています。
 
-## 公開済みリリース
+## 利用可能なリリース
 
-- [v0.1.0](/ja/guide/releases/v0.1.0) - Windows 前提の自律 OpenClaw チームスターター初回リリース
+- [v0.1.0](/ja/guide/releases/v0.1.0) - Windows ファーストで自動チームを起動する OpenClaw スターターとしての初回リリース

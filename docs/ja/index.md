@@ -2,18 +2,18 @@
 layout: home
 
 hero:
-  name: "onizuka-openclaw-autonomous-team-starter"
-  text: "自律 OpenClaw チームのスターターキット"
-  tagline: "ONIZUKA シリーズの一員として、隔離ランタイム・役割 scaffold・Mattermost 連携をまとめた Windows 前提のスターターです。"
+  name: "ONI-CADIA"
+  text: "自律的な OpenClaw チーム向けの起動コマンド群"
+  tagline: "ONI-CADIA は Podman の分離ランタイム、役割ごとのスカフォールド、ローカルの Mattermost ラボを 1 つの導線にまとめた ONIZUKA シリーズです。"
   image:
     src: "/favicon.svg"
-    alt: "ONIZUKA シリーズ向け自律 OpenClaw チームスターターのヘッダー画像"
+    alt: "ONI-CADIA のロゴ"
   actions:
     - theme: brand
       text: "クイックスタート"
       link: "/ja/guide/quickstart"
     - theme: alt
-      text: "自律チーム案内"
+      text: "自律チームガイド"
       link: "/ja/guide/agent-teams"
     - theme: alt
       text: "検証"
@@ -23,35 +23,36 @@ hero:
       link: "/ja/guide/releases/v0.1.0"
 
 features:
-  - title: "自律チームごとの隔離状態"
-    details: "各 agent に Podman runtime、config、workspace、port を分けて持たせるので、1 つの共有状態に潰れずに運用できます。"
-  - title: "管理された persona scaffold"
-    details: "`SOUL.md`、`IDENTITY.md`、`USER.md`、`HEARTBEAT.md`、`TOOLS.md`、`BOOTSTRAP.md` を自動配置して、起動直後から役割を持った teammate にできます。"
-  - title: "Mattermost 会話ラボ"
-    details: "ローカル Mattermost pod、bot seed、smoke test、heartbeat autonomy までを同じ repo で回せます。"
+  - title: "自律チーム運用と独立状態"
+    details: "エージェントごとに Podman のランタイム、設定、ワークスペース、ポートを分離し、1 か所に状態が集中しない構成にします。"
+  - title: "persona スカフォールド"
+    details: "seed された `SOUL.md` / `IDENTITY.md` / `USER.md` / `HEARTBEAT.md` / `TOOLS.md` / `BOOTSTRAP.md` が、単なるコンテナをチームメンバーに近づけます。"
+  - title: "Mattermost 連携ラボ"
+    details: "ローカル Mattermost を起動し、bot seed、smoke test、heartbeat 駆動の自律会話をすぐ使えます。"
 ---
 
-## この docs で分かること
+## このリポジトリで得られること
 
-- `uv` と PowerShell で進める Windows 前提の導入手順
-- agent ごとの `pod.yaml` と workspace scaffold の考え方
-- Mattermost で人間と agent が会話するための運用導線
-- ローカルモデル検証と運用 QA への導線
+- `uv` と PowerShell で管理する Windows ファーストの OpenClaw スターター
+- 単体/複数エージェント向けに `pod.yaml` を生成
+- 役割・性格・heartbeat 振る舞いを持つ workspace スカフォールド
+- 人間メンションとエージェント間チャットを想定したローカル連携面
+- ローカルモデル導線の検証ノート
 
 ## ONIZUKA シリーズ
 
-この repository は、自律 agent と AGI ワークフローを扱う ONIZUKA シリーズの一員です。
+本リポジトリは、ONIZUKA シリーズの一部で、オーセンティックな自律エージェントと AGI 向けワークフローを想定しています。
 
-- [ONIZUKA AGI Co. 紹介 repository](https://github.com/onizuka-agi-co/onizuka-agi-co)
+- [ONIZUKA AGI Co. イントロダクション](https://github.com/onizuka-agi-co/onizuka-agi-co)
 
 ## 最新リリース
 
-- [v0.1.0 リリースノート](/ja/guide/releases/v0.1.0)
-- [v0.1.0 公開ウォークスルー](/ja/guide/articles/v0.1.0-launch)
+- [Release Notes: v0.1.0](/ja/guide/releases/v0.1.0)
+- [同梱記事: v0.1.0 を公開](/ja/guide/articles/v0.1.0-launch)
 
 ## 次に読む
 
-- [自律チーム案内](/ja/guide/agent-teams)
+- [自律チームガイド](/ja/guide/agent-teams)
 - [クイックスタート](/ja/guide/quickstart)
 - [設定](/ja/guide/configuration)
 - [検証](/ja/guide/validation)

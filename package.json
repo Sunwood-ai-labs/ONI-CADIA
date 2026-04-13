@@ -1,5 +1,5 @@
 {
-  "name": "onizuka-openclaw-autonomous-team-starter",
+  "name": "oni-cadia",
   "version": "0.1.0",
   "description": "Starter for autonomous OpenClaw teams on Podman",
   "main": "index.js",
@@ -14,16 +14,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter.git"
+    "url": "git+https://github.com/Sunwood-ai-labs/ONI-CADIA.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter/issues"
+    "url": "https://github.com/Sunwood-ai-labs/ONI-CADIA/issues"
   },
-  "homepage": "https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter#readme",
+  "homepage": "https://github.com/Sunwood-ai-labs/ONI-CADIA#readme",
   "dependencies": {
     "playwright": "^1.59.1"
   }

@@ -1,10 +1,10 @@
 import { defineConfig } from "vitepress";
 
-const repo = "https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter";
-const base = "/onizuka-openclaw-autonomous-team-starter/";
+const repo = "https://github.com/Sunwood-ai-labs/ONI-CADIA";
+const base = "/ONI-CADIA/";
 
 export default defineConfig({
-  title: "onizuka-openclaw-autonomous-team-starter",
+  title: "ONI-CADIA",
   description:
     "Windows-first ONIZUKA-series starter for autonomous OpenClaw teams with isolated runtimes, role scaffolds, and a local Mattermost coordination lab.",
   lang: "en-US",
@@ -13,13 +13,11 @@ export default defineConfig({
   lastUpdated: true,
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: `${base}favicon.svg` }],
-    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: `${base}favicon-32x32.png` }],
-    ["link", { rel: "icon", type: "image/png", sizes: "16x16", href: `${base}favicon-16x16.png` }],
-    ["link", { rel: "apple-touch-icon", sizes: "180x180", href: `${base}apple-touch-icon.png` }],
+    ["meta", { name: "theme-color", content: "#1a0505" }],
   ],
   themeConfig: {
-    siteTitle: "onizuka-openclaw-autonomous-team-starter",
-    logo: "/header.svg",
+    siteTitle: "ONI-CADIA",
+    logo: "/favicon.svg",
     socialLinks: [{ icon: "github", link: repo }],
     footer: {
       message: "Released under the MIT License.",
@@ -68,7 +66,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "ガイド", link: "/ja/guide/quickstart" },
-          { text: "自律チーム案内", link: "/ja/guide/agent-teams" },
+          { text: "自律チーム", link: "/ja/guide/agent-teams" },
           { text: "設定", link: "/ja/guide/configuration" },
           { text: "検証", link: "/ja/guide/validation" },
           { text: "リリース", link: "/ja/guide/releases" },
@@ -80,7 +78,7 @@ export default defineConfig({
             text: "ガイド",
             items: [
               { text: "クイックスタート", link: "/ja/guide/quickstart" },
-              { text: "自律チーム案内", link: "/ja/guide/agent-teams" },
+              { text: "自律チームガイド", link: "/ja/guide/agent-teams" },
               { text: "設定", link: "/ja/guide/configuration" },
               { text: "検証", link: "/ja/guide/validation" },
             ],
@@ -91,7 +89,7 @@ export default defineConfig({
               { text: "リリースノート一覧", link: "/ja/guide/releases" },
               { text: "v0.1.0 リリースノート", link: "/ja/guide/releases/v0.1.0" },
               { text: "記事一覧", link: "/ja/guide/articles" },
-              { text: "v0.1.0 公開ウォークスルー", link: "/ja/guide/articles/v0.1.0-launch" },
+              { text: "v0.1.0 を公開", link: "/ja/guide/articles/v0.1.0-launch" },
             ],
           },
         ],

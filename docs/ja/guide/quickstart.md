@@ -1,18 +1,18 @@
 # クイックスタート
 
-このページは最短でローカルチームを動かすための導線です。役割 scaffold や協働モデルを詳しく見たい時は、初回起動のあとに [自律チーム導入](/ja/guide/agent-teams) を読むと把握しやすいです。
+最短でローカルチームを立ち上げる手順です。まずは 3 体で起動し、役割スカフォールドと協調モデルの詳細は [自律チームガイド](/ja/guide/agent-teams) を参照してください。
 
 ## 前提
 
 - `uv`
 - `Podman`
 - `openclaw` CLI
-- OpenClaw から使える provider key、または OpenClaw から到達できるローカル Ollama model
+- 設定済みプロバイダーキー、または OpenClaw から到達可能なローカル Ollama
 
-## 3 人チームを起動
+## 3 体のチームを起動
 
 ```powershell
-cd D:\Prj\onizuka-openclaw-autonomous-team-starter
+cd D:\Prj\ONI-CADIA
 uv sync
 Copy-Item .env.example .env
 notepad .env
@@ -25,18 +25,18 @@ notepad .env
 .\scripts\mattermost.ps1 smoke --count 3
 ```
 
-公開プロジェクト名: `onizuka-openclaw-autonomous-team-starter`
-現行 helper command 名: `openclaw-podman`
+公開プロジェクト名: `ONI-CADIA`  
+現在のヘルパーコマンド: `openclaw-podman`
 
-## 生成されるもの
+## 生成物
 
-agent ごと:
+各エージェント:
 
 - `.openclaw/instances/agent_00X/openclaw.json`
 - `.openclaw/instances/agent_00X/pod.yaml`
 - `.openclaw/instances/agent_00X/workspace/`
 
-workspace ごと:
+各 workspace:
 
 - `AGENTS.md`
 - `SOUL.md`
@@ -48,11 +48,11 @@ workspace ごと:
 
 ## 既定の triad
 
-- Instance 1 / `いおり`: 運用リード
-- Instance 2 / `つむぎ`: 構築役
-- Instance 3 / `さく`: 検証役
+- Instance 1 / `システム統括`
+- Instance 2 / `設計メモ係`
+- Instance 3 / `検証担当`
 
-## Mattermost でよく使うコマンド
+## よく使う Mattermost コマンド
 
 ```powershell
 .\scripts\mattermost.ps1 smoke --count 3
@@ -61,9 +61,9 @@ workspace ごと:
 .\scripts\mattermost.ps1 lounge run-now --count 3 --wait-seconds 15
 ```
 
-まずは `smoke` で返信導線を確認し、その後に自律 chatter を試したい時だけ `lounge enable` を足すのが安全です。
+`smoke` が最初の安全確認です。`lounge enable` は基本チャット導線が確認できた後に有効化します。
 
-## 単体起動パス
+## 単体起動の代替
 
 ```powershell
 .\scripts\init.ps1
@@ -71,7 +71,7 @@ workspace ごと:
 .\scripts\launch.ps1 --dry-run
 ```
 
-実行時の基礎コマンド:
+実行コマンド:
 
 ```powershell
 podman kube play --replace --no-pod-prefix .\.openclaw\pod.yaml

@@ -1,6 +1,6 @@
 <div align="center">
 
-# onizuka-openclaw-autonomous-team-starter
+# ONI-CADIA
 
 ![Project header](./assets/header.svg)
 
@@ -8,12 +8,12 @@ Starter kit for running small teams of OpenClaw agents on Podman with isolated p
 
 [日本語 README](./README.ja.md)
 
-![CI](https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter/actions/workflows/ci.yml/badge.svg)
-![License](https://img.shields.io/github/license/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter)
+![CI](https://github.com/Sunwood-ai-labs/ONI-CADIA/actions/workflows/ci.yml/badge.svg)
+![License](https://img.shields.io/github/license/Sunwood-ai-labs/ONI-CADIA)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![Podman](https://img.shields.io/badge/podman-kube%20play-892CA0)
 
-[Docs Site](https://sunwood-ai-labs.github.io/onizuka-openclaw-autonomous-team-starter/)
+[Docs Site](https://sunwood-ai-labs.github.io/ONI-CADIA/)
 
 </div>
 
@@ -87,7 +87,7 @@ The repository versions a sanitized subset of generated `.openclaw` files so the
 ## Quick Start: Boot A Triad
 
 ```powershell
-cd D:\Prj\onizuka-openclaw-autonomous-team-starter
+cd D:\Prj\ONI-CADIA
 uv sync
 Copy-Item .env.example .env
 notepad .env
@@ -100,7 +100,7 @@ notepad .env
 .\scripts\mattermost.ps1 smoke --count 3
 ```
 
-The public project name is `onizuka-openclaw-autonomous-team-starter`, while the current helper command remains `openclaw-podman`.
+The public project name is `ONI-CADIA`, while the current helper command remains `openclaw-podman`.
 
 After that, you have:
 
@@ -124,7 +124,7 @@ Enable that when you want the team to speak on its own after the basic chat path
 If you want a minimal first pass before you boot a team:
 
 ```powershell
-cd D:\Prj\onizuka-openclaw-autonomous-team-starter
+cd D:\Prj\ONI-CADIA
 uv sync
 Copy-Item .env.example .env
 notepad .env

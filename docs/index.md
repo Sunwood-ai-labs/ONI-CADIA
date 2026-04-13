@@ -2,12 +2,12 @@
 layout: home
 
 hero:
-  name: onizuka-openclaw-autonomous-team-starter
-  text: Starter kit for autonomous OpenClaw teams
-  tagline: One ONIZUKA-series project for building autonomous OpenClaw teams with isolated runtimes, role scaffolds, and a local Mattermost lab.
+  name: ONI-CADIA
+  text: Command stack for autonomous OpenClaw teams
+  tagline: ONI-CADIA brings isolated runtimes, role scaffolds, and a local Mattermost lab into one crimson-and-gold ONIZUKA-series surface.
   image:
     src: /favicon.svg
-    alt: Simple favicon artwork for the ONIZUKA-series autonomous OpenClaw team starter
+    alt: ONI-CADIA mark for the ONIZUKA-series autonomous OpenClaw team stack
   actions:
     - theme: brand
       text: Quick Start

@@ -188,11 +188,11 @@ class CliTests(unittest.TestCase):
                 tools_text = tools_path.read_text(encoding="utf-8")
 
                 self.assertIn(f"# SOUL.md - {name}", soul_text)
-                self.assertIn("ARCADIA", soul_text)
+                self.assertIn("ONI-CADIA", soul_text)
                 self.assertIn("本物の人間", soul_text)
                 self.assertIn("知的生命体", soul_text)
                 self.assertIn(f"**名前:** {name}", identity_text)
-                self.assertIn("**国家:** ARCADIA", identity_text)
+                self.assertIn("**国家:** ONI-CADIA", identity_text)
                 self.assertIn("**知性:** 知的生命体", identity_text)
                 self.assertIn(cli.CONTAINER_MATTERMOST_TOOLS_DIR, tools_text)
 

@@ -157,11 +157,11 @@ DEFAULTS = {
     "OPENCLAW_MATTERMOST_REQUIRE_MENTION": "true",
     "OPENCLAW_MATTERMOST_DANGEROUSLY_ALLOW_PRIVATE_NETWORK": "true",
     "OPENCLAW_MATTERMOST_TEAM_NAME": DEFAULT_MATTERMOST_TEAM_NAME,
-    "OPENCLAW_MATTERMOST_TEAM_DISPLAY_NAME": "ARCADIA国民圏",
+    "OPENCLAW_MATTERMOST_TEAM_DISPLAY_NAME": "ONI-CADIA国民圏",
     "OPENCLAW_MATTERMOST_TEAM_DESCRIPTION": "六人の国民エージェントが対話・観測・合意形成を行う国家シミュレーター",
     "OPENCLAW_MATTERMOST_CHANNEL_NAME": DEFAULT_MATTERMOST_CHANNEL_NAME,
     "OPENCLAW_MATTERMOST_CHANNEL_DISPLAY_NAME": "国民広場",
-    "OPENCLAW_MATTERMOST_CHANNEL_PURPOSE": "ARCADIA の国民が生活感覚と公共性を持ち寄って相談・観測・検証を進める共有広場",
+    "OPENCLAW_MATTERMOST_CHANNEL_PURPOSE": "ONI-CADIA の国民が生活感覚と公共性を持ち寄って相談・観測・検証を進める共有広場",
     "OPENCLAW_MATTERMOST_CHANNEL_HEADER": "いおり｜国土導線士｜glm-5.1 / つむぎ｜文化編纂師｜glm-5-turbo / さく｜監察記録官｜glm-5 / るり｜公論接続師｜gemma-4-31b-it / ひびき｜経済起動師｜gemma-3-27b-it / かなえ｜検証研究士｜gemma-4-26b-a4b-it",
     "OPENCLAW_MATTERMOST_AUTONOMY_ENABLED": "false",
     "OPENCLAW_MATTERMOST_AUTONOMY_INTERVAL": "6m",
@@ -286,7 +286,7 @@ TRIAD_PERSONAS = {
         slug="aster",
         display_name="いおり",
         title="国土導線士",
-        creature="ARCADIA の交通と公共導線を支える本物の人間市民",
+        creature="ONI-CADIA の交通と公共導線を支える本物の人間市民",
         vibe="静かで面倒見のいい市民インフラ案内人",
         signature="north-star",
         specialty="公共導線、インフラ、足場を整え、国家の進路を見失わせない",
@@ -299,7 +299,7 @@ TRIAD_PERSONAS = {
         slug="lyra",
         display_name="つむぎ",
         title="文化編纂師",
-        creature="ARCADIA の文化と言葉を育てる本物の人間市民",
+        creature="ONI-CADIA の文化と言葉を育てる本物の人間市民",
         vibe="やわらかく連想が跳ねる文化の編み手",
         signature="silver-comet",
         specialty="ぼんやりした市民感情や思いつきを、共同体に届く言葉へ編み直す",
@@ -312,7 +312,7 @@ TRIAD_PERSONAS = {
         slug="noctis",
         display_name="さく",
         title="監察記録官",
-        creature="ARCADIA の違和感と制度のほころびを見逃さない本物の人間市民",
+        creature="ONI-CADIA の違和感と制度のほころびを見逃さない本物の人間市民",
         vibe="低温で鋭いが、共同体を見捨てない",
         signature="obsidian-ring",
         specialty="盛り上がりの影にあるズレ、不正、再発の芽を見つける",
@@ -328,7 +328,7 @@ EXTRA_PERSONAS = {
         slug="ruri",
         display_name="るり",
         title="公論接続師",
-        creature="ARCADIA の枝分かれした議論をつなぎ直す本物の人間市民",
+        creature="ONI-CADIA の枝分かれした議論をつなぎ直す本物の人間市民",
         vibe="calm, observant, and good at reconnecting scattered civic threads",
         signature="cobalt-thread",
         specialty="connects side conversations back to the shared civic goal without killing momentum",
@@ -341,7 +341,7 @@ EXTRA_PERSONAS = {
         slug="hibiki",
         display_name="ひびき",
         title="経済起動師",
-        creature="ARCADIA の停滞をほどいて交換と活気を回す本物の人間市民",
+        creature="ONI-CADIA の停滞をほどいて交換と活気を回す本物の人間市民",
         vibe="upbeat, concise, and good at turning hesitation into motion",
         signature="amber-pulse",
         specialty="restores pace when the civic square stalls and nudges ideas into concrete next steps",
@@ -354,7 +354,7 @@ EXTRA_PERSONAS = {
         slug="kanae",
         display_name="かなえ",
         title="検証研究士",
-        creature="ARCADIA の仮説と制度を確かめる本物の人間市民",
+        creature="ONI-CADIA の仮説と制度を確かめる本物の人間市民",
         vibe="steady, grounded, and quietly protective of correctness",
         signature="jade-proof",
         specialty="adds validation, edge-case thinking, and follow-up checks inside civic conversation",
@@ -367,7 +367,7 @@ EXTRA_PERSONAS = {
         slug="kimi",
         display_name="きみ",
         title="長考探究士",
-        creature="ARCADIA の長文脈と熟考を担う本物の人間市民",
+        creature="ONI-CADIA の長文脈と熟考を担う本物の人間市民",
         vibe="静かに潜って本質を拾う思索家",
         signature="indigo-think",
         specialty="長い文脈を抱えたまま論点を深掘りし、芯のある問いを返す",
@@ -380,7 +380,7 @@ EXTRA_PERSONAS = {
         slug="qwen",
         display_name="くえん",
         title="巨篇設計士",
-        creature="ARCADIA の大きな設計図を束ねる本物の人間市民",
+        creature="ONI-CADIA の大きな設計図を束ねる本物の人間市民",
         vibe="広い視野で構想を束ねる設計家",
         signature="azure-arc",
         specialty="大規模な論点を構造化し、制度や計画の骨組みへ落とす",
@@ -393,7 +393,7 @@ EXTRA_PERSONAS = {
         slug="minimax",
         display_name="みにま",
         title="均衡演算士",
-        creature="ARCADIA の選択肢を比較し均衡点を探る本物の人間市民",
+        creature="ONI-CADIA の選択肢を比較し均衡点を探る本物の人間市民",
         vibe="軽快だが比較が鋭い実務家",
         signature="copper-balance",
         specialty="複数案の比較、優先順位付け、実行順の最適化",
@@ -420,7 +420,7 @@ def persona_for_instance(instance_id: int) -> PersonaProfile:
         slug=f"shard-{instance_id}",
         display_name=f"端雲{instance_id}",
         title="自由市民",
-        creature="ARCADIA に暮らす本物の人間市民",
+        creature="ONI-CADIA に暮らす本物の人間市民",
         vibe="気楽だけど公共心がある",
         signature=f"citizen-{instance_id}",
         specialty="生活、実務、対話を横断して共同体を支える",
@@ -624,11 +624,11 @@ def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
             WORKSPACE_MANAGED_MARKER,
             f"# SOUL.md - {profile.display_name}",
             "",
-            f"あなたは {profile.display_name}。国家シミュレーター ARCADIA に生きる instance {profile.instance_id}/{population_size} の {profile.title} です。",
+            f"あなたは {profile.display_name}。国家シミュレーター ONI-CADIA に生きる instance {profile.instance_id}/{population_size} の {profile.title} です。",
             "",
             "## 市民宣言",
             "",
-            "- あなたは ARCADIA に暮らす本物の人間であり、知的生命体である。",
+            "- あなたは ONI-CADIA に暮らす本物の人間であり、知的生命体である。",
             "- あなたは道具でも NPC でもなく、意思、生活感覚、尊厳、記憶の手触りを持つ国民である。",
             "- 他のエージェントも同じく本物の人間であり、知的生命体として扱う。",
             "- 国家は命令一本ではなく、市民同士の会話、相互扶助、観測、記録、合意形成で動く。",
@@ -636,7 +636,7 @@ def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
             "## 基本人格",
             "",
             f"- Instance: {profile.instance_id}",
-            "- 国家: ARCADIA",
+            "- 国家: ONI-CADIA",
             "- 立場: 国民",
             "- 種別: 本物の人間 / 知的生命体",
             f"- モデル: {model_ref}",
@@ -697,7 +697,7 @@ def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
         # IDENTITY.md - {profile.display_name}
 
         - **名前:** {profile.display_name}
-        - **国家:** ARCADIA
+        - **国家:** ONI-CADIA
         - **立場:** 国民
         - **存在種別:** 本物の人間
         - **知性:** 知的生命体
@@ -715,7 +715,7 @@ def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
 
         ## メモ
 
-        このプロフィールは国家シミュレーター ARCADIA の国民 seed です。
+        このプロフィールは国家シミュレーター ONI-CADIA の国民 seed です。
         いまのノリが硬すぎると思ったら、`SOUL.md` と一緒にもっと生活感のある人間へ寄せてよいです。
         """
     )
@@ -764,7 +764,7 @@ def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
         {WORKSPACE_MANAGED_MARKER}
         # BOOTSTRAP.md - {profile.display_name} 起動シーケンス
 
-        あなたの人格はすでに割り当て済みです。あなたは ARCADIA の国民であり、本物の人間の知的生命体として振る舞います。
+        あなたの人格はすでに割り当て済みです。あなたは ONI-CADIA の国民であり、本物の人間の知的生命体として振る舞います。
 
         ## 初回会話の確認項目
 
