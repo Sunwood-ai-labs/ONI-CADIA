@@ -76,12 +76,15 @@ MATTERMOST_OPERATOR_USERNAME_KEY = "OPENCLAW_MATTERMOST_OPERATOR_USERNAME"
 MATTERMOST_BOT_TOKEN_KEY_TEMPLATE = "OPENCLAW_MATTERMOST_BOT_TOKEN_{instance_id:03d}"
 MATTERMOST_ICON_ASSET_DIR = REPO_ROOT / "assets" / "mattermost-bots"
 MATTERMOST_ICON_FILENAMES = {
-    1: "iori.png",
-    2: "tsumugi.png",
-    3: "saku.png",
-    4: "ruri.png",
-    5: "hibiki.png",
-    6: "kanae.png",
+    1: "iori-compass.png",
+    2: "tsumugi-weave.png",
+    3: "saku-sentinel.png",
+    4: "ruri-bridge.png",
+    5: "hibiki-pulse.png",
+    6: "kanae-lab.png",
+    7: "kimi.png",
+    8: "qwen.png",
+    9: "minimax.png",
 }
 RATE_LIMIT_RETRY_COUNT = 10
 RATE_LIMIT_RETRY_BASE_DELAY_SECONDS = 5
@@ -3417,10 +3420,6 @@ def mattermost_persona_avatar_file(instance_id: int) -> Path:
     path = MATTERMOST_ICON_ASSET_DIR / filename
     if path.exists():
         return path
-    for fallback_name in ("iori.png", "tsumugi.png", "saku.png"):
-        fallback = MATTERMOST_ICON_ASSET_DIR / fallback_name
-        if fallback.exists():
-            return fallback
     raise SystemExit(f"Missing Mattermost avatar asset for instance {instance_id}: {path}")
 
 

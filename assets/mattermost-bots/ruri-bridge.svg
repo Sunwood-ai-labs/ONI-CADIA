@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Ruri Mattermost bot avatar">
+  <defs>
+    <linearGradient id="ruri-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#071020" />
+      <stop offset="56%" stop-color="#1a4b8a" />
+      <stop offset="100%" stop-color="#8ce1ff" />
+    </linearGradient>
+    <linearGradient id="ruri-bridge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5fbff" />
+      <stop offset="100%" stop-color="#8fd9ff" />
+    </linearGradient>
+    <filter id="ruri-shadow" x="-20%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#040913" flood-opacity="0.42" />
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="128" fill="url(#ruri-bg)" />
+  <circle cx="256" cy="256" r="186" fill="none" stroke="#eff7ff" stroke-opacity="0.14" stroke-width="12" />
+
+  <path d="M94 202 C138 158 198 134 256 134 C314 134 374 158 418 202" fill="none" stroke="#c6edff" stroke-width="14" stroke-linecap="round" opacity="0.82" />
+  <rect x="118" y="182" width="58" height="182" rx="24" fill="#0c2852" fill-opacity="0.86" />
+  <rect x="336" y="182" width="58" height="182" rx="24" fill="#0c2852" fill-opacity="0.86" />
+  <path d="M126 330 C172 252 340 252 386 330" fill="none" stroke="url(#ruri-bridge)" stroke-width="42" stroke-linecap="round" filter="url(#ruri-shadow)" />
+  <path d="M154 332 V228 M204 306 V208 M256 296 V194 M308 306 V208 M358 332 V228" fill="none" stroke="#e7f7ff" stroke-width="12" stroke-linecap="round" opacity="0.82" />
+  <circle cx="256" cy="250" r="34" fill="#f8fbff" />
+  <circle cx="256" cy="250" r="14" fill="#76c9ff" />
+  <path d="M108 380 C164 356 348 356 404 380" fill="none" stroke="#a3e7ff" stroke-width="12" stroke-linecap="round" opacity="0.72" />
+  <circle cx="118" cy="182" r="10" fill="#dff4ff" />
+  <circle cx="394" cy="182" r="10" fill="#dff4ff" />
+  <circle cx="126" cy="330" r="10" fill="#8fe2ff" />
+  <circle cx="386" cy="330" r="10" fill="#8fe2ff" />
+</svg>

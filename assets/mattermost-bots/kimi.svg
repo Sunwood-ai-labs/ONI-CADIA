@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Kimi Mattermost bot avatar">
+  <defs>
+    <linearGradient id="kimi-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#090d22" />
+      <stop offset="54%" stop-color="#2f2d86" />
+      <stop offset="100%" stop-color="#9aa5ff" />
+    </linearGradient>
+    <linearGradient id="kimi-path" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f2f0ff" />
+      <stop offset="100%" stop-color="#a7b2ff" />
+    </linearGradient>
+    <filter id="kimi-shadow" x="-20%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#050814" flood-opacity="0.42" />
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="128" fill="url(#kimi-bg)" />
+  <circle cx="256" cy="256" r="186" fill="none" stroke="#eff1ff" stroke-opacity="0.14" stroke-width="12" />
+  <path d="M380 152 H188 V324 H324 V188 H236 V276 H288" fill="none" stroke="url(#kimi-path)" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" filter="url(#kimi-shadow)" />
+  <path d="M332 108 L356 132 M356 108 L332 132" fill="none" stroke="#dce0ff" stroke-width="10" stroke-linecap="round" />
+  <path d="M138 366 L162 390 M162 366 L138 390" fill="none" stroke="#bfc8ff" stroke-width="10" stroke-linecap="round" />
+  <circle cx="288" cy="276" r="20" fill="#f2f1ff" />
+  <circle cx="288" cy="276" r="8" fill="#7380ff" />
+  <circle cx="140" cy="166" r="10" fill="#d7dbff" />
+  <circle cx="390" cy="338" r="10" fill="#bbc4ff" />
+</svg>

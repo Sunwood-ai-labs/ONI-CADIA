@@ -690,12 +690,29 @@ class CliTests(unittest.TestCase):
         self.assertEqual(cli.mattermost_persona_username(9), "minimax")
 
     def test_mattermost_persona_avatar_files_exist(self) -> None:
-        self.assertEqual(cli.mattermost_persona_avatar_file(1).name, "iori.png")
-        self.assertEqual(cli.mattermost_persona_avatar_file(2).name, "tsumugi.png")
-        self.assertEqual(cli.mattermost_persona_avatar_file(3).name, "saku.png")
-        self.assertTrue(cli.mattermost_persona_avatar_file(1).exists())
-        self.assertTrue(cli.mattermost_persona_avatar_file(2).exists())
-        self.assertTrue(cli.mattermost_persona_avatar_file(3).exists())
+        expected = {
+            1: "iori-compass.png",
+            2: "tsumugi-weave.png",
+            3: "saku-sentinel.png",
+            4: "ruri-bridge.png",
+            5: "hibiki-pulse.png",
+            6: "kanae-lab.png",
+            7: "kimi.png",
+            8: "qwen.png",
+            9: "minimax.png",
+        }
+
+        for instance_id, filename in expected.items():
+            with self.subTest(instance_id=instance_id):
+                avatar_path = cli.mattermost_persona_avatar_file(instance_id)
+                self.assertEqual(avatar_path.name, filename)
+                self.assertTrue(avatar_path.exists())
+
+    def test_mattermost_persona_avatar_file_raises_when_asset_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            with mock.patch.object(cli, "MATTERMOST_ICON_ASSET_DIR", Path(tmp)):
+                with self.assertRaises(SystemExit):
+                    cli.mattermost_persona_avatar_file(1)
 
 
 if __name__ == "__main__":

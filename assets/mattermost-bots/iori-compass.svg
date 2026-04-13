@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Iori Mattermost bot avatar">
+  <defs>
+    <linearGradient id="iori-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#07111f" />
+      <stop offset="56%" stop-color="#163d66" />
+      <stop offset="100%" stop-color="#d49a2d" />
+    </linearGradient>
+    <linearGradient id="iori-star" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff7da" />
+      <stop offset="100%" stop-color="#ffc555" />
+    </linearGradient>
+    <linearGradient id="iori-road" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8fd7ff" />
+      <stop offset="100%" stop-color="#effaff" />
+    </linearGradient>
+    <filter id="iori-shadow" x="-20%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#050d17" flood-opacity="0.42" />
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="128" fill="url(#iori-bg)" />
+  <path d="M92 128 H420 M92 256 H420 M92 384 H420 M128 92 V420 M256 92 V420 M384 92 V420" fill="none" stroke="#e8f5ff" stroke-opacity="0.1" stroke-width="10" stroke-linecap="round" />
+  <circle cx="256" cy="256" r="182" fill="none" stroke="#f8fbff" stroke-opacity="0.16" stroke-width="12" />
+
+  <path d="M256 78 L291 221 L434 256 L291 291 L256 434 L221 291 L78 256 L221 221 Z" fill="url(#iori-star)" filter="url(#iori-shadow)" />
+  <path d="M256 128 L279 232 L384 256 L279 280 L256 384 L233 280 L128 256 L233 232 Z" fill="#0b1e35" fill-opacity="0.68" />
+
+  <path d="M164 168 L220 224 M348 168 L292 224 M164 344 L220 288 M348 344 L292 288" fill="none" stroke="url(#iori-road)" stroke-width="18" stroke-linecap="round" />
+  <path d="M256 92 V142 M256 370 V420 M92 256 H142 M370 256 H420" fill="none" stroke="#fff8e1" stroke-width="12" stroke-linecap="round" />
+
+  <circle cx="164" cy="168" r="12" fill="#dff5ff" />
+  <circle cx="348" cy="168" r="12" fill="#dff5ff" />
+  <circle cx="164" cy="344" r="12" fill="#fff0b7" />
+  <circle cx="348" cy="344" r="12" fill="#fff0b7" />
+  <circle cx="256" cy="256" r="38" fill="#fff9e8" />
+  <circle cx="256" cy="256" r="14" fill="#ffb642" />
+</svg>
