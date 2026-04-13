@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime, timezone
 
 from common_runtime import (
     BOT_IDS,
@@ -10,6 +11,7 @@ from common_runtime import (
     fetch_channel_posts,
     fetch_me,
     find_channel_summary,
+    latest_post_for_handle,
     list_my_channels,
     list_team_channels,
     load_control_values,
@@ -32,6 +34,7 @@ def main(args: argparse.Namespace) -> int:
     handle = HANDLES[instance_id]
     runtime = load_control_values()
     base_url, token = load_mattermost_runtime()
+    now_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
 
     me = fetch_me(base_url, token)
     actual_handle = str(me.get("username", "")).strip()
@@ -62,10 +65,22 @@ def main(args: argparse.Namespace) -> int:
         channel_id = str(default_summary.get("channel_id", "")).strip()
         posts, order = fetch_channel_posts(base_url, token, channel_id)
         limited, reason = should_rate_limit(handle, posts, order, bot_ids, False)
+        last_self_post_at = latest_post_for_handle(posts, order, bot_ids, handle)
         rate_limit = {
             "limited": limited,
             "reason": reason,
             "post_count": len(order),
+        }
+        self_activity = {
+            "last_post_at": last_self_post_at,
+            "seconds_since_last_post": None
+            if not last_self_post_at
+            else max(0, (now_ms - last_self_post_at) // 1000),
+        }
+    else:
+        self_activity = {
+            "last_post_at": 0,
+            "seconds_since_last_post": None,
         }
 
     payload = {
@@ -82,6 +97,7 @@ def main(args: argparse.Namespace) -> int:
         },
         "default_channel": runtime["default_channel"],
         "rate_limit": rate_limit,
+        "self_activity": self_activity,
         "channels": channel_summaries,
     }
     print(json.dumps(payload, ensure_ascii=False, indent=2))

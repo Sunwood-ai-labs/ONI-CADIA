@@ -80,6 +80,33 @@ class CliTests(unittest.TestCase):
                 raw_env={},
             ),
         )
+
+    def build_instance_for_id(self, instance_id: int) -> cli.ScaledInstance:
+        return cli.ScaledInstance(
+            instance_id=instance_id,
+            pod_name=f"openclaw-{instance_id}-pod",
+            container_name=f"openclaw-{instance_id}",
+            config=cli.Config(
+                env_file=Path("D:/tmp/.env"),
+                container_name=f"openclaw-{instance_id}",
+                image="image",
+                gateway_port=18789 + ((instance_id - 1) * 2),
+                bridge_port=18790 + ((instance_id - 1) * 2),
+                board_port=18889 + ((instance_id - 1) * 2),
+                publish_host="127.0.0.1",
+                network="podman",
+                gateway_bind="lan",
+                userns="keep-id",
+                config_dir=Path(f"D:/tmp/instances/agent_{instance_id:03d}"),
+                workspace_dir=Path(f"D:/tmp/instances/agent_{instance_id:03d}/workspace"),
+                gateway_token="token",
+                ollama_base_url="http://127.0.0.1:11434",
+                ollama_model="gemma4:e2b",
+                board_image="python:3.11-slim",
+                raw_env={},
+            ),
+        )
+
     def test_run_pod_local_agent_retries_on_rate_limit(self) -> None:
         rate_limited_payload = json.dumps(
             {
@@ -119,6 +146,71 @@ class CliTests(unittest.TestCase):
 
     def test_mattermost_get_state_module_exposes_main(self) -> None:
         self.assertTrue(hasattr(mattermost_get_state, "main"))
+
+    def test_render_workspace_files_kimi_prefers_visible_public_posts(self) -> None:
+        files = cli.render_workspace_files(self.build_instance_for_id(7))
+
+        self.assertIn('"channel_preference": [\n    "triad-lab"', files["SOUL.md"])
+        self.assertIn("self_activity.seconds_since_last_post", files["HEARTBEAT.md"])
+        self.assertIn("reaction より短い本文投稿か thread 返信を優先する。", files["HEARTBEAT.md"])
+
+    def test_render_workspace_files_minimax_adds_japanese_only_chat_guard(self) -> None:
+        files = cli.render_workspace_files(self.build_instance_for_id(9))
+
+        self.assertIn("Mattermost の投稿は日本語だけで整える。簡体字やハングルが混ざった文のまま出さない。", files["SOUL.md"])
+        self.assertIn("投稿文は必ず自然な日本語 1〜2 文で書く。簡体字やハングルを混ぜない。", files["HEARTBEAT.md"])
+
+    def test_mattermost_get_state_includes_self_activity(self) -> None:
+        args = argparse.Namespace(instance=7)
+        stdout = io.StringIO()
+        with (
+            mock.patch.object(mattermost_get_state, "load_control_values", return_value={"team_name": "openclaw", "default_channel": "triad-lab"}),
+            mock.patch.object(mattermost_get_state, "load_mattermost_runtime", return_value=("http://mattermost:8065", "token")),
+            mock.patch.object(mattermost_get_state, "fetch_me", return_value={"id": "user-kimi", "username": "kimi", "display_name": ""}),
+            mock.patch.object(mattermost_get_state, "resolve_team", return_value=("openclaw", "team-1")),
+            mock.patch.object(mattermost_get_state, "list_team_channels", return_value=[{"id": "channel-1", "name": "triad-lab", "type": "O"}]),
+            mock.patch.object(mattermost_get_state, "list_my_channels", return_value={"channel-1"}),
+            mock.patch.object(mattermost_get_state, "resolve_bot_ids", return_value={"kimi": "user-kimi"}),
+            mock.patch.object(
+                mattermost_get_state,
+                "summarize_channels",
+                return_value=[
+                    {
+                        "channel_id": "channel-1",
+                        "channel_name": "triad-lab",
+                        "display_name": "国民広場",
+                        "purpose": "public square",
+                        "member": True,
+                        "last_post_at": 2000,
+                        "threads": [],
+                    }
+                ],
+            ),
+            mock.patch.object(mattermost_get_state, "fetch_channel_posts", return_value=({"post-1": {"user_id": "user-kimi", "create_at": 1000}}, ["post-1"])),
+            mock.patch.object(mattermost_get_state, "should_rate_limit", return_value=(False, "ok")),
+            redirect_stdout(stdout),
+        ):
+            exit_code = mattermost_get_state.main(args)
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["self_activity"]["last_post_at"], 1000)
+        self.assertIsInstance(payload["self_activity"]["seconds_since_last_post"], int)
+        self.assertGreaterEqual(payload["self_activity"]["seconds_since_last_post"], 0)
+
+    def test_normalize_outbound_message_rewrites_known_mixed_phrases(self) -> None:
+        message = "藍睡、广場の灯りに溶け込むように靜かに開く。均衡も同样、最初の足音が结构を締めくくる。"
+
+        normalized = mattermost_common_runtime.normalize_outbound_message("minimax", message)
+
+        self.assertEqual(
+            normalized,
+            "藍睡、広場の灯りに溶け込むように静かに開く。均衡も同じように、最初の足音が構造を締めくくる。",
+        )
+
+    def test_normalize_outbound_message_rejects_remaining_non_japanese_mix(self) -> None:
+        with self.assertRaises(RuntimeError):
+            mattermost_common_runtime.normalize_outbound_message("minimax", "この文は한글が混ざっています。")
 
     def test_load_mattermost_runtime_resolves_bot_token_from_state_env(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

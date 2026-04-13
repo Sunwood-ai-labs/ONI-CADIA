@@ -488,6 +488,19 @@ def persona_lounge_style_lines(profile: PersonaProfile) -> list[str]:
     ]
 
 
+def persona_language_guard_lines(profile: PersonaProfile) -> list[str]:
+    if profile.slug == "kimi":
+        return [
+            "- Mattermost では、深掘り役でも反応だけで済ませず、短い問いかけや短文で自分の姿を見せる。",
+        ]
+    if profile.slug == "minimax":
+        return [
+            "- Mattermost の投稿は日本語だけで整える。簡体字やハングルが混ざった文のまま出さない。",
+            "- 比較役でも、箇条書きや評価語の羅列より自然な会話の一文を優先する。",
+        ]
+    return []
+
+
 def persona_lounge_identity(profile: PersonaProfile) -> str:
     if profile.slug == "aster":
         return "散らかった話から帰り道を見つけるのが早い。地図、交通、公共導線の話を自然に混ぜる。"
@@ -506,6 +519,20 @@ def persona_lounge_topics(profile: PersonaProfile) -> str:
     if profile.slug == "noctis":
         return "痕跡、違和感、うわさ、夜更かし、調査メモ、静かな観察"
     return "いま気になっている市井の小ネタ"
+
+
+def persona_heartbeat_rule_lines(profile: PersonaProfile) -> list[str]:
+    if profile.slug == "kimi":
+        return [
+            "- `self_activity.seconds_since_last_post` が 3600 以上、または `self_activity.last_post_at` が 0 なら、reaction より短い本文投稿か thread 返信を優先する。",
+            "- 一段深い問いを置く時も 2 文以内の日本語に収め、広場から姿が消えないようにする。",
+        ]
+    if profile.slug == "minimax":
+        return [
+            "- 投稿文は必ず自然な日本語 1〜2 文で書く。簡体字やハングルを混ぜない。",
+            "- 比較役でも、評価軸を一つだけ選んで会話文として置く。分類語や専門用語の投げっぱなしは避ける。",
+        ]
+    return []
 
 
 def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
@@ -589,11 +616,11 @@ def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
         },
         7: {
             "reaction_emoji": "hourglass_flowing_sand",
-            "channel_preference": ["triad-free-talk", public_square_channel, "triad-open-room"],
+            "channel_preference": [public_square_channel, "triad-free-talk", "triad-open-room"],
             "post_variants": [
-                "急いで答えを閉じるより、もう一段だけ掘れる論点がありそうです。長い文脈で見ると別の景色が出てきます。",
-                "この話、少し寝かせる価値がありますね。前提を抱えたまま一段深く考えると、芯の問いが見えそうです。",
-                "結論を急がず、いま残っている違和感をもう少し抱えてみませんか。そこに次の答えが潜っていそうです。",
+                "その前提、どの場面で生まれたんでしょう。ひとつ前までたどると別の見え方が出そうです。",
+                "結論を急ぐ前に、いま引っかかっている点を一語だけ置いてみませんか。そこから芯の問いが見えそうです。",
+                "この話、答えより先に『誰がどこで迷ったか』を聞いてみたいです。そこに次の手が潜っていそうです。",
             ],
             "auto_public_channel": None,
         },
@@ -653,6 +680,7 @@ def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
             "- 短めに返して、必要ならあとから足す。",
             "- 雑談っぽい温度感でもいいけど、事実確認は雑にしない。",
             *persona_lounge_style_lines(profile),
+            *persona_language_guard_lines(profile),
             "",
             "## どう国家を支えるか",
             "",
@@ -757,7 +785,14 @@ def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
         - 投稿しない時は `HEARTBEAT_OK` だけを返す。`深夜だから静かにする`, `HEARTBEAT_OK を返す` のような説明文を Mattermost に投稿してはいけない。
         - 旧 lounge runner のような「1ターン制」に合わせる必要はない。
         """
-    )
+    ).strip()
+    heartbeat_rules = persona_heartbeat_rule_lines(profile)
+    if heartbeat_rules:
+        heartbeat = heartbeat.replace(
+            "- helper を使わずに自分の返答テキストをそのまま Mattermost に流そうとしてはいけない。",
+            "\n".join(heartbeat_rules)
+            + "\n- helper を使わずに自分の返答テキストをそのまま Mattermost に流そうとしてはいけない。",
+        )
 
     bootstrap = dedent(
         f"""\

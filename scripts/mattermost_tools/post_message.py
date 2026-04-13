@@ -12,6 +12,7 @@ from common_runtime import (
     list_team_channels,
     load_control_values,
     load_mattermost_runtime,
+    normalize_outbound_message,
     post_message,
     resolve_bot_ids,
     resolve_team,
@@ -58,7 +59,7 @@ def main(args: argparse.Namespace) -> int:
         base_url,
         token,
         channel_id,
-        args.message,
+        normalize_outbound_message(handle, args.message),
         root_post_id=args.root_post_id.strip() if args.root_post_id else None,
     )
     marker = "REPLIED" if args.root_post_id else "POSTED"

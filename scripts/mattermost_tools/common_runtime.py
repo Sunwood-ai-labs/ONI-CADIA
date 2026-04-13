@@ -5,6 +5,7 @@ import json
 import os
 import re
 import time
+import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib import error as urllib_error
@@ -48,6 +49,17 @@ MIN_SECONDS_BETWEEN_SAME_SPEAKER_POSTS = 4 * 60
 
 BOT_IDS: dict[str, str] = {}
 ENV_PLACEHOLDER_RE = re.compile(r"\$\{([A-Z0-9_]+)\}")
+DISALLOWED_HANGUL_RE = re.compile(r"[\u1100-\u11ff\u3130-\u318f\uac00-\ud7af]")
+DISALLOWED_SIMPLIFIED_CJK_RE = re.compile(r"[广样结构这们开关话气边东]")
+JAPANESE_ONLY_MESSAGE_REPLACEMENTS: tuple[tuple[str, str], ...] = (
+    ("廣場", "広場"),
+    ("广場", "広場"),
+    ("靜", "静"),
+    ("同样", "同じように"),
+    ("这样", "こうして"),
+    ("结构", "構造"),
+    ("중에", "中で"),
+)
 
 
 def parse_env_file(path: Path) -> dict[str, str]:
@@ -406,6 +418,18 @@ def clean_message(text: str) -> str:
             lines = lines[:-1]
         cleaned = "\n".join(lines).strip()
     return cleaned
+
+
+def normalize_outbound_message(handle: str, text: str) -> str:
+    normalized = unicodedata.normalize("NFKC", clean_message(text))
+    for source, target in JAPANESE_ONLY_MESSAGE_REPLACEMENTS:
+        normalized = normalized.replace(source, target)
+    if handle in HANDLES.values():
+        if DISALLOWED_HANGUL_RE.search(normalized) or DISALLOWED_SIMPLIFIED_CJK_RE.search(normalized):
+            raise RuntimeError(
+                "message must stay in natural Japanese only; remove mixed Chinese/Korean characters before posting"
+            )
+    return normalized
 
 
 def normalize_channel_name(raw: str) -> str:
