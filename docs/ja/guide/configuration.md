@@ -6,10 +6,15 @@
 - `OPENCLAW_PODMAN_PUBLISH_HOST`: 公開先ホストアドレス
 - `OPENCLAW_OLLAMA_BASE_URL`: Ollama API エンドポイント
 - `OPENCLAW_OLLAMA_MODEL`: 既定 Ollama モデル ID
+- `OPENCLAW_MODEL_REF`: `zai/glm-5.1`、`ollama/gemma4:e2b`、`google/gemma-4-26b-a4b-it`、`nvidia/moonshotai/kimi-k2-thinking` のような provider 付き model ref
+- `OPENCLAW_MODEL_FALLBACKS`: fallback model ref のカンマ区切り。Z.AI fallback を引き継がせたくない provider では空にします
+- `OPENCLAW_ZAI_BASE_URL` / `OPENCLAW_OPENROUTER_BASE_URL` / `OPENCLAW_NVIDIA_BASE_URL`: 対象 provider の endpoint
 - `OPENCLAW_SCALE_INSTANCE_ROOT`: 生成インスタンスのルート
 - `OPENCLAW_SCALE_GATEWAY_PORT_START`: ゲートウェイ開始ポート
 - `OPENCLAW_SCALE_BRIDGE_PORT_START`: ブリッジ開始ポート
 - `OPENCLAW_SCALE_PORT_STEP`: インスタンスごとのポート増分
+
+provider API key は `.env` に置き、provider 名ごとに pod へ渡します。現在の対象は `ZAI_API_KEY`、`OPENROUTER_API_KEY`、`GEMINI_API_KEY`、`NVIDIA_API_KEY` です。
 
 ## エージェント向け調整
 
@@ -21,9 +26,14 @@
 - `OPENCLAW_MATTERMOST_AUTONOMY_INTERVAL`
 - `OPENCLAW_MATTERMOST_AUTONOMY_INTERVAL_INSTANCE_00N`
 - `OPENCLAW_MATTERMOST_AUTONOMY_MODEL`
+- `OPENCLAW_MODEL_REF_INSTANCE_00N`
+- `OPENCLAW_MODEL_FALLBACKS_INSTANCE_00N`
+- `OPENCLAW_MATTERMOST_AUTONOMY_MODEL_INSTANCE_00N`
 
 チーム行動の大半は env ではなく workspace 側のスカフォールドで決まります。  
 `.env` で基盤値を揃えた後、各 workspace の `SOUL.md` / `IDENTITY.md` / `USER.md` / `HEARTBEAT.md` を必要に応じて編集してください。
+
+インスタンス別 model override を使うと、同じチーム内で provider を混在できます。`.env.example` には Google/Gemma 席 4-6 と NVIDIA 任意席 7-9 の例があり、対応する API key を用意した上で `--count 9` と組み合わせます。
 
 ## Windows + WSL Podman の補足
 

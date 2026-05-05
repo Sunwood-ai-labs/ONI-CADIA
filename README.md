@@ -264,6 +264,10 @@ Verified Z.AI path:
 
 The repo can pass `ZAI_API_KEY` through to the pod when present in `.env`.
 
+### Provider-Mixed Teams
+
+Use `OPENCLAW_MODEL_REF_INSTANCE_00N` and `OPENCLAW_MATTERMOST_AUTONOMY_MODEL_INSTANCE_00N` when a larger team should mix providers. `.env.example` includes Google/Gemma examples for seats 4-6 and NVIDIA Build / NIM examples for optional seats 7-9. Set the matching provider key, such as `GEMINI_API_KEY` or `NVIDIA_API_KEY`, before launching those seats.
+
 ## Verification Reports
 
 Validation notes are kept in:

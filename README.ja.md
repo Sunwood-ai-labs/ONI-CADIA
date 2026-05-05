@@ -174,9 +174,9 @@ podman kube play --replace --no-pod-prefix .\.openclaw\pod.yaml
 
 初期ロール:
 
-- Instance 1 / `システム統括`: 配備、manifest、状態管理
-- Instance 2 / `設計メモ係`: docs・プロンプト・アイデア整理
-- Instance 3 / `検証担当`: テスト、差分、リスクチェック
+- Instance 1 / `いおり`: 配備、manifest、状態管理
+- Instance 2 / `つむぎ`: docs・プロンプト・アイデア整理
+- Instance 3 / `さく`: テスト、差分、リスクチェック
 
 ## Mattermost Communication Lab
 
@@ -252,6 +252,10 @@ http://172.27.208.1:11434
 - model: `zai/glm-5-turbo`
 
 `ZAI_API_KEY` が `.env` にある場合は pod に引き継がれます。
+
+### provider 混在チーム
+
+大きめのチームで provider を混在させる場合は、`OPENCLAW_MODEL_REF_INSTANCE_00N` と `OPENCLAW_MATTERMOST_AUTONOMY_MODEL_INSTANCE_00N` を使います。`.env.example` には Google/Gemma 席 4-6 と NVIDIA Build / NIM 任意席 7-9 の例があります。起動前に `GEMINI_API_KEY` や `NVIDIA_API_KEY` など対応する provider key を設定してください。
 
 ## 検証レポート
 
