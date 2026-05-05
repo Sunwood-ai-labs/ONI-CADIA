@@ -1,67 +1,69 @@
-# Release QA Inventory
+# Release QA Inventory: v0.1.0
 
 ## Release Context
 
-- repository: `D:\Prj\openclaw-podman-starter`
+- repository: `Sunwood-ai-labs/ONI-CADIA`
 - release tag: `v0.1.0`
-- compare range: `<none>; initial release mode from root commit f12e84b39ceb8f439a71f07e86739c5f2aa1c584 to tag v0.1.0`
-- requested outputs: GitHub release body, docs-backed release notes, companion walkthrough article
-- validation commands run: `powershell -ExecutionPolicy Bypass -File D:\Prj\gh-release-notes-skill\scripts\collect-release-context.ps1 -Target main`, `powershell -ExecutionPolicy Bypass -File D:\Prj\gh-release-notes-skill\scripts\verify-svg-assets.ps1 -RepoPath . -Path assets/header.svg,assets/release-header-v0.1.0.svg,docs/public/release-header-v0.1.0.svg`, `uv run python -m compileall src scripts\mattermost_tools`, `uv run python -m unittest discover -s tests`, `uv run openclaw-podman --help`, `npm --prefix docs run docs:build`, `gh release view v0.1.0 --json url,name,body,isDraft,isPrerelease,publishedAt,tagName,targetCommitish`, `gh api repos/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter/releases/tags/v0.1.0 --jq ".published_at"`, `git ls-remote --tags origin v0.1.0`
-- release URLs: `https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter/releases/tag/v0.1.0`, `https://sunwood-ai-labs.github.io/onizuka-openclaw-autonomous-team-starter/guide/releases/v0.1.0`, `https://sunwood-ai-labs.github.io/onizuka-openclaw-autonomous-team-starter/guide/articles/v0.1.0-launch`
+- compare range: initial release with no previous tag, root commit `c50d6bb` through the peeled `v0.1.0` tag target
+- requested outputs: GitHub release body, docs-backed release notes, companion walkthrough article, release header SVG, QA inventory
+- validation commands run: `git fetch --tags --prune`, `git diff --stat $(git rev-list --max-parents=0 HEAD)..HEAD`, `uv run python -m compileall src scripts/mattermost_tools`, `uv run python -m unittest discover -s tests`, `uv run openclaw-podman --help`, `npm --prefix docs ci`, `npm --prefix docs run docs:build`, SVG XML and internal reference check
+- release URLs: `https://github.com/Sunwood-ai-labs/ONI-CADIA/releases/tag/v0.1.0`, `https://sunwood-ai-labs.github.io/ONI-CADIA/guide/releases/v0.1.0`, `https://sunwood-ai-labs.github.io/ONI-CADIA/guide/articles/v0.1.0-launch`
+- published at: `2026-05-05T17:04:48Z`, equivalent to `2026-05-06T02:04:48+09:00`
 
 ## Claim Matrix
 
 | claim | code refs | validation refs | docs surfaces touched | scope |
 | --- | --- | --- | --- | --- |
-| The repo ships a Windows-first starter CLI plus PowerShell wrappers for single-instance and scaled team flows | `src/openclaw_podman_starter/cli.py`, `scripts/init.ps1`, `scripts/launch.ps1`, `scripts/status.ps1`, `scripts/logs.ps1`, `scripts/stop.ps1`, `scripts/print-env.ps1` | `uv run openclaw-podman --help`, `uv run python -m unittest discover -s tests`, `gh-release-notes-skill\scripts\collect-release-context.ps1 -Target main` | `README.md`, `README.ja.md`, `docs/guide/quickstart.md`, `docs/ja/guide/quickstart.md` | steady_state |
-| The shipped team loop includes tracked persona scaffolds and a heartbeat-first Mattermost lab | `src/openclaw_podman_starter/cli.py`, `scripts/mattermost.ps1`, `scripts/mattermost_tools/common_runtime.py`, `scripts/mattermost_tools/get_state.py`, `scripts/mattermost_tools/post_message.py`, `scripts/mattermost_tools/create_channel.py`, `scripts/mattermost_tools/add_reaction.py` | `uv run python -m unittest discover -s tests`, `reports/qa-inventory-mattermost-autochat-2026-04-09.md`, `gh-release-notes-skill\scripts\collect-release-context.ps1 -Target main` | `docs/guide/agent-teams.md`, `docs/ja/guide/agent-teams.md`, `docs/guide/validation.md`, `docs/ja/guide/validation.md` | steady_state |
-| The docs site now carries versioned release notes, a companion article, and a published release header for v0.1.0 | `docs/.vitepress/config.ts`, `assets/release-header-v0.1.0.svg`, `docs/public/release-header-v0.1.0.svg` | `npm --prefix docs run docs:build`, `gh-release-notes-skill\scripts\verify-svg-assets.ps1 -RepoPath . -Path assets/header.svg,assets/release-header-v0.1.0.svg,docs/public/release-header-v0.1.0.svg`, `https://sunwood-ai-labs.github.io/onizuka-openclaw-autonomous-team-starter/guide/releases/v0.1.0` | `docs/index.md`, `docs/ja/index.md`, `docs/guide/releases/v0.1.0.md`, `docs/ja/guide/releases/v0.1.0.md` | release_collateral |
-| The release also ships experimental Rokuseki Mattermost branding bundles and a companion walkthrough article, with README surfaces updated to mention the plugin artifact area | `mattermost-plugins/jp.sunwood.rokuseki-brand/plugin.json`, `mattermost-plugins/jp.sunwood.rokuseki-sidebar-icon/plugin.json`, `reports/rokuseki-channel-plugin.png`, `reports/sidebar-inspect.png` | `gh-release-notes-skill\scripts\collect-release-context.ps1 -Target main`, `https://sunwood-ai-labs.github.io/onizuka-openclaw-autonomous-team-starter/guide/articles/v0.1.0-launch`, `https://sunwood-ai-labs.github.io/onizuka-openclaw-autonomous-team-starter/ja/guide/articles/v0.1.0-launch` | `README.md`, `README.ja.md`, `docs/guide/articles/v0.1.0-launch.md`, `docs/ja/guide/articles/v0.1.0-launch.md` | mixed |
+| The release is the first tagged ONI-CADIA release and covers the full initial shipped history | `git tag --list`, `git ls-remote --tags origin v0.1.0`, `git diff --stat $(git rev-list --max-parents=0 HEAD)..HEAD` | `gh release view v0.1.0 --json url,name,tagName,isDraft,isPrerelease,publishedAt,targetCommitish,body` | docs/guide/releases/v0.1.0.md, docs/ja/guide/releases/v0.1.0.md | release_scope |
+| Operators can run lifecycle commands through the Python CLI and PowerShell wrappers | `src/openclaw_podman_starter/cli.py`, `scripts/*.ps1`, `.github/workflows/ci.yml` | `uv run openclaw-podman --help`, GitHub CI run `25390523782` | README.md, README.ja.md, docs/guide/releases/v0.1.0.md, docs/ja/guide/releases/v0.1.0.md | steady_state |
+| Managed per-agent workspace and heartbeat-first Mattermost scaffolds are part of the shipped starter | `src/openclaw_podman_starter/cli.py`, `scripts/mattermost_tools/*.py`, `.openclaw/instances/agent_*/workspace/*.md`, `tests/test_cli.py` | `uv run python -m unittest discover -s tests`, GitHub CI run `25390523782` | README.md, README.ja.md, docs/guide/agent-teams.md, docs/ja/guide/agent-teams.md, docs/guide/articles/v0.1.0-launch.md, docs/ja/guide/articles/v0.1.0-launch.md | steady_state |
+| Provider-mixed teams can be configured with provider-qualified model refs and per-instance overrides | `.env.example`, `src/openclaw_podman_starter/cli.py`, `tests/test_cli.py` | `uv run python -m unittest discover -s tests`, `test_ensure_openclaw_config_supports_nvidia_model_ref`, `test_mattermost_persona_usernames_use_romanized_handles` | README.md, README.ja.md, docs/guide/configuration.md, docs/ja/guide/configuration.md, docs/guide/releases/v0.1.0.md, docs/ja/guide/releases/v0.1.0.md | steady_state |
+| Bilingual release docs, companion articles, and release header SVG are published through GitHub Pages | `docs/.vitepress/config.ts`, `docs/guide/releases/v0.1.0.md`, `docs/ja/guide/releases/v0.1.0.md`, `docs/guide/articles/v0.1.0-launch.md`, `docs/ja/guide/articles/v0.1.0-launch.md`, `docs/public/release-header-v0.1.0.svg`, `.github/workflows/pages.yml` | `npm --prefix docs run docs:build`, Pages run `25390523748`, live `curl` checks returned 200 | docs/guide/releases.md, docs/ja/guide/releases.md, docs/guide/articles.md, docs/ja/guide/articles.md, docs/guide/releases/v0.1.0.md, docs/ja/guide/releases/v0.1.0.md, docs/guide/articles/v0.1.0-launch.md, docs/ja/guide/articles/v0.1.0-launch.md | release_collateral |
 
 ## Steady-State Docs Review
 
 | surface | status | evidence |
 | --- | --- | --- |
-| README.md | pass | Updated the repository layout section to mention `mattermost-plugins/` so the release note claim about bundled experimental plugins is reflected in steady-state docs |
-| README.ja.md | pass | Updated the Japanese repository layout section with the matching `mattermost-plugins/` note |
-| docs/index.md | pass | Added latest-release links to the docs-backed release note and companion walkthrough |
-| docs/ja/index.md | pass | Added the same latest-release links in the Japanese docs home |
-| docs/guide/quickstart.md | pass | Reviewed current startup flow against the release claims; no change needed because the shipped quickstart already matches the release body |
-| docs/ja/guide/quickstart.md | pass | Reviewed Japanese quickstart against the release claims; no change needed |
-| docs/guide/agent-teams.md | pass | Reviewed heartbeat-first helper and team-loop claims against the current guide; no change needed |
-| docs/ja/guide/agent-teams.md | pass | Reviewed the Japanese team guide for the same claims; no change needed |
-| docs/guide/configuration.md | pass | Reviewed per-instance autonomy interval and trust-model wording; no change needed for this release |
-| docs/ja/guide/configuration.md | pass | Reviewed the Japanese configuration page; no change needed |
-| docs/guide/validation.md | pass | Reviewed validation claims against shipped reports and local commands; no change needed |
-| docs/ja/guide/validation.md | pass | Reviewed the Japanese validation page; no change needed |
-| docs/guide/releases/v0.1.0.md | pass | Created the English docs-backed release note page for the initial release |
-| docs/ja/guide/releases/v0.1.0.md | pass | Created the Japanese docs-backed release note page for the initial release |
-| docs/guide/articles/v0.1.0-launch.md | pass | Created the English companion walkthrough article |
-| docs/ja/guide/articles/v0.1.0-launch.md | pass | Created the Japanese companion walkthrough article |
+| README.md | pass | Reviewed primary English operator surface and added provider-mixed team guidance for seats 4-9 |
+| README.ja.md | pass | Synced Japanese triad role names to the actual personas and added provider-mixed team guidance |
+| docs/guide/configuration.md | pass | Added `OPENCLAW_MODEL_REF`, fallback, provider endpoint, provider key, and per-instance override guidance |
+| docs/ja/guide/configuration.md | pass | Added the matching Japanese model ref, provider endpoint, provider key, and per-instance override guidance |
+| docs/guide/releases/v0.1.0.md | pass | Corrected the six-seat wording to scope optional NVIDIA seats 7-9 and updated validation commands |
+| docs/ja/guide/releases/v0.1.0.md | pass | Corrected the Japanese six-seat wording to scope optional NVIDIA seats 7-9 and updated validation commands |
+| docs/guide/articles/v0.1.0-launch.md | pass | Added the tracked starter state claim for triad, expanded seats, and optional NVIDIA seats |
+| docs/ja/guide/articles/v0.1.0-launch.md | pass | Added the matching Japanese tracked starter state claim |
+| docs/guide/quickstart.md | pass | Reviewed, no change needed because the default operator path remains `--count 3` |
+| docs/ja/guide/quickstart.md | pass | Reviewed, no change needed because the default Japanese operator path remains `--count 3` |
+| docs/guide/agent-teams.md | pass | Reviewed, no change needed because it already describes heartbeat-first helper behavior and workspace scaffolds |
+| docs/ja/guide/agent-teams.md | pass | Reviewed, no change needed because it already describes heartbeat-first helper behavior and workspace scaffolds |
+| docs/guide/releases.md | pass | Reviewed release index, existing v0.1.0 link remains current |
+| docs/ja/guide/releases.md | pass | Reviewed Japanese release index, existing v0.1.0 link remains current |
+| docs/guide/articles.md | pass | Reviewed article index, existing launch article link remains current |
+| docs/ja/guide/articles.md | pass | Reviewed Japanese article index, existing launch article link remains current |
 
 ## QA Inventory
 
 | criterion_id | status | evidence |
 | --- | --- | --- |
-| compare_range | pass | `powershell -ExecutionPolicy Bypass -File D:\Prj\gh-release-notes-skill\scripts\collect-release-context.ps1 -Target main` reported initial release mode with no previous tag |
-| release_claims_backed | pass | Claims are tied to the claim matrix code refs, `git log --reverse --stat --no-merges`, the collector output, and direct file inspection of the current repo surfaces |
-| docs_release_notes | pass | `docs/guide/releases/v0.1.0.md, docs/ja/guide/releases/v0.1.0.md` |
-| companion_walkthrough | pass | `docs/guide/articles/v0.1.0-launch.md, docs/ja/guide/articles/v0.1.0-launch.md` |
-| operator_claims_extracted | pass | Claim matrix completed above for CLI, scaffolds, Mattermost lab, docs publishing, and plugin collateral |
-| impl_sensitive_claims_verified | pass | Verified implementation-sensitive claims against `src/openclaw_podman_starter/cli.py`, `scripts/mattermost_tools/common_runtime.py`, `.github/workflows/ci.yml`, `.github/workflows/pages.yml`, and `tests/test_cli.py` |
-| steady_state_docs_reviewed | pass | README and primary docs surfaces were reviewed in the table above, with changed files or explicit no-change rationale recorded |
-| claim_scope_precise | pass | Release body and docs pages scope the plugin bundles as experimental and state explicitly that `v0.1.0` is an initial release with no previous tag |
-| latest_release_links_updated | pass | `docs/.vitepress/config.ts`, `docs/index.md`, and `docs/ja/index.md` now expose release/article navigation and latest-release links |
-| svg_assets_validated | pass | `powershell -ExecutionPolicy Bypass -File D:\Prj\gh-release-notes-skill\scripts\verify-svg-assets.ps1 -RepoPath . -Path assets/header.svg,assets/release-header-v0.1.0.svg,docs/public/release-header-v0.1.0.svg` returned `SVG assets look valid.` |
-| docs_assets_committed_before_tag | pass | Release collateral was committed in `a73491e Add v0.1.0 release collateral` before the local and remote `v0.1.0` tag was created |
-| docs_deployed_live | pass | Pages run `https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter/actions/runs/24307504048` completed successfully, and the English/Japanese release/article URLs plus the release header SVG returned HTTP 200 |
-| tag_local_remote | pass | Local tag `v0.1.0` points at `a73491e`, and `git ls-remote --tags origin v0.1.0` returned `refs/tags/v0.1.0` |
-| github_release_verified | pass | `gh release view v0.1.0 --json url,name,body,isDraft,isPrerelease,publishedAt,tagName,targetCommitish` returned the expected public URL and final release body |
-| validation_commands_recorded | pass | Validation commands are listed in Release Context and mirrored on `docs/guide/releases/v0.1.0.md` and `docs/ja/guide/releases/v0.1.0.md` |
-| publish_date_verified | pass | `gh api repos/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter/releases/tags/v0.1.0 --jq ".published_at"` returned `2026-04-12T13:12:36Z` |
+| compare_range | pass | No previous tag existed before release. Initial release range was resolved from root commit `c50d6bb` through the peeled `v0.1.0` tag target |
+| release_claims_backed | pass | Inspected `src/openclaw_podman_starter/cli.py`, `tests/test_cli.py`, `.env.example`, `.github/workflows/*.yml`, `docs/`, `assets/`, and `reports/` |
+| docs_release_notes | pass | docs/guide/releases/v0.1.0.md, docs/ja/guide/releases/v0.1.0.md |
+| companion_walkthrough | pass | docs/guide/articles/v0.1.0-launch.md, docs/ja/guide/articles/v0.1.0-launch.md |
+| operator_claims_extracted | pass | Claim Matrix completed above with CLI, Mattermost, provider, docs, Pages, and release scope claims |
+| impl_sensitive_claims_verified | pass | CLI, provider, Mattermost, and model override claims verified against code and `uv run python -m unittest discover -s tests` |
+| steady_state_docs_reviewed | pass | README, configuration docs, quickstart docs, agent-team docs, release indexes, release notes, and articles reviewed in the table above |
+| claim_scope_precise | pass | Wording distinguishes default triad, six-seat public-square copy, optional NVIDIA seats 7-9, and experimental Rokuseki bundles |
+| latest_release_links_updated | pass | Release and article indexes already point to v0.1.0 and were reviewed as current |
+| svg_assets_validated | pass | Python SVG check verified XML parse, scalable dimensions, and internal refs for `assets/header.svg`, `assets/release-header-v0.1.0.svg`, `docs/public/release-header-v0.1.0.svg` |
+| docs_assets_committed_before_tag | pass | Release docs, article pages, and header asset were committed in `b3fd0a8` and pushed before creating `v0.1.0` |
+| docs_deployed_live | pass | GitHub Pages run `25390523748` succeeded and live docs/article/header URLs returned HTTP 200 |
+| tag_local_remote | pass | Local annotated tag `v0.1.0` exists and `git ls-remote --tags origin v0.1.0*` shows both the tag object and peeled commit |
+| github_release_verified | pass | `gh release view v0.1.0 --json url,name,tagName,isDraft,isPrerelease,publishedAt,targetCommitish,body` verified a non-draft release at `https://github.com/Sunwood-ai-labs/ONI-CADIA/releases/tag/v0.1.0` |
+| validation_commands_recorded | pass | Validation commands are recorded in this Release Context and in the docs-backed release notes |
+| publish_date_verified | pass | GitHub release `publishedAt` is `2026-05-05T17:04:48Z`, equivalent to `2026-05-06T02:04:48+09:00` |
 
 ## Notes
 
 - blockers: none
-- waivers: none
-- follow-up docs tasks: review GitHub Actions steps that still emit Node 20 deprecation warnings and decide whether to upgrade to Node 24-compatible action versions in a future maintenance release
+- waivers: host shell does not provide `pwsh` or `powershell`, so SVG checks were run with an equivalent Python XML/reference validator on this Mac
+- follow-up docs tasks: none for v0.1.0
