@@ -33,7 +33,7 @@ features:
   - title: Operational substrate
     details: Podman, OpenClaw, tracked `.openclaw` state, and validation flows provide the mechanical layer that keeps the country simulation reproducible.
   - title: Resettable civilization
-    details: Every reset preserves names, models, icons, and connectivity while archiving the previous civilization as literature before starting again.
+    details: Every reset preserves only names and model assignments as identity, while archiving the previous civilization as literature before starting again.
 ---
 
 ## What ONI-CADIA Simulates
