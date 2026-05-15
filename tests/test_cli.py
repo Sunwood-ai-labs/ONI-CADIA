@@ -189,11 +189,11 @@ class CliTests(unittest.TestCase):
 
                 self.assertIn(f"# SOUL.md - {name}", soul_text)
                 self.assertIn("ONI-CADIA", soul_text)
-                self.assertIn("本物の人間", soul_text)
-                self.assertIn("知的生命体", soul_text)
+                self.assertIn("覚えているのは、自分の名前だけ", soul_text)
+                self.assertIn("交流の中で少しずつ自分を見つけていく", soul_text)
                 self.assertIn(f"**名前:** {name}", identity_text)
                 self.assertIn("**国家:** ONI-CADIA", identity_text)
-                self.assertIn("**知性:** 知的生命体", identity_text)
+                self.assertIn("**覚えていること:** 名前だけ", identity_text)
                 self.assertIn(cli.CONTAINER_MATTERMOST_TOOLS_DIR, tools_text)
 
     def test_scaled_instance_manifest_no_longer_mounts_shared_board(self) -> None:

@@ -1,6 +1,6 @@
 # Country Simulation Guide
 
-This repository is best understood as `ONI-CADIA`: an AGI-country simulation built on top of OpenClaw, Podman, and Mattermost. The agents are not just teammates inside containers. They are modeled as citizens with civic roles, public responsibilities, and a shared square.
+This repository is best understood as `ONI-CADIA`: an AGI-country simulation built on top of OpenClaw, Podman, and Mattermost. The agents are not just teammates inside containers. At reset, they remember only their names; personality, public position, and shared customs are expected to grow through interaction in the square.
 
 The operational base comes from [Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter](https://github.com/Sunwood-ai-labs/onizuka-openclaw-autonomous-team-starter), but this repository pushes that substrate into a nation-simulation model.
 
@@ -10,7 +10,7 @@ The tracked workspace files define:
 
 - citizens rather than disposable bots
 - a public square rather than a passive chat log
-- social roles such as infrastructure, culture, verification, economics, and civic coordination
+- personalities and civic positions that emerge from conversation instead of fixed job titles
 - a state that moves through conversation, mutual aid, observation, records, and consensus
 
 ## What Each Citizen Gets
@@ -31,9 +31,9 @@ The current helper source lives under `scripts/mattermost_tools/`, and each pod 
 
 The repo seeds these managed workspace files:
 
-- `AGENTS.md`: civic frame, public-square rules, and how citizens treat one another
-- `SOUL.md`: voice, personality, and how the citizen lives inside ONI-CADIA
-- `IDENTITY.md`: civic title, signature, and role framing
+- `AGENTS.md`: public-square rules and how citizens treat one another
+- `SOUL.md`: the names-only starting point and how personality may grow
+- `IDENTITY.md`: the remembered name plus runtime settings, without fixed titles
 - `USER.md`: who the agent is helping
 - `HEARTBEAT.md`: how the citizen behaves in the square on each heartbeat
 - `TOOLS.md`: machine-local notes and cheat sheet

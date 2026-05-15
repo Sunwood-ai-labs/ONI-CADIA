@@ -48,9 +48,11 @@ notepad .env
 
 ## 既定の triad
 
-- Instance 1 / `システム統括`
-- Instance 2 / `設計メモ係`
-- Instance 3 / `検証担当`
+- Instance 1 / `いおり`
+- Instance 2 / `つむぎ`
+- Instance 3 / `さく`
+
+各 instance は固定担当ではなく、名前だけを持って始まります。人格や立ち位置は、Mattermost と共同作業の交流から育てます。
 
 ## よく使う Mattermost コマンド
 
