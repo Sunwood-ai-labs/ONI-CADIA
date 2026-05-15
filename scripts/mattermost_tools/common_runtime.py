@@ -362,6 +362,7 @@ def summarize_channels(
     default_channel: str,
     bot_ids: dict[str, str],
 ) -> list[dict[str, object]]:
+    default_match = next((channel for channel in team_channels if str(channel.get("name", "")).strip() == default_channel), None)
     triad_channels = [
         channel
         for channel in team_channels
@@ -369,7 +370,6 @@ def summarize_channels(
     ]
     sorted_channels = sorted(triad_channels, key=lambda item: int(item.get("last_post_at", 0) or 0), reverse=True)
     selected: list[dict[str, object]] = []
-    default_match = next((channel for channel in sorted_channels if str(channel.get("name", "")).strip() == default_channel), None)
     if isinstance(default_match, dict):
         selected.append(default_match)
     for channel in sorted_channels:
