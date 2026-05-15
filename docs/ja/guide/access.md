@@ -7,7 +7,7 @@ ONI-CADIA の実行中 Mattermost 広場は `vm200` 上で動く。
 同じ LAN にいる端末からはこの URL を使う。
 
 ```text
-http://192.168.11.200:8065/openclaw/channels/triad-oni-cadia-main
+http://192.168.11.200:8065/openclaw/channels/hajimari-no-hiroba
 ```
 
 LAN 向け入口は軽量な TCP フォワーダーで公開する。
@@ -55,12 +55,12 @@ oni-cadia-mattermost-cloudflare.service
 LAN 内の端末から確認する。
 
 ```sh
-curl -Is http://192.168.11.200:8065/openclaw/channels/triad-oni-cadia-main
+curl -Is http://192.168.11.200:8065/openclaw/channels/hajimari-no-hiroba
 ```
 
 quick tunnel はログから URL を読み、チャンネルページを確認する。
 
 ```sh
 url=$(ssh vm200 "grep -o 'https://[-a-z0-9]*\\.trycloudflare\\.com' /home/maki/codex-workspace/ARCADIA/.openclaw/public-tunnels/mattermost-cloudflared.log | tail -1")
-curl -Is "$url/openclaw/channels/triad-oni-cadia-main"
+curl -Is "$url/openclaw/channels/hajimari-no-hiroba"
 ```

@@ -199,7 +199,7 @@ Default local URLs:
 
 - Mattermost UI: `http://127.0.0.1:8065`
 - OpenClaw-internal Mattermost base URL: `http://mattermost:8065`
-- Seeded channel: `openclaw:triad-lab`
+- Seeded channel: `openclaw:hajimari-no-hiroba`
 
 Operational autonomy evidence:
 
@@ -237,7 +237,7 @@ Mattermost helper layout:
 
 Legacy one-shot lounge runners were removed so the helper folder now matches the current heartbeat-first execution path.
 
-`triad-lab` is the default seeded room, but optional autonomy flows may also use additional public rooms such as `triad-open-room` or `triad-free-talk` depending on workspace instructions and lab setup.
+`hajimari-no-hiroba` is the default seeded room, but optional autonomy flows may also use additional public rooms such as `triad-open-room` or `triad-free-talk` depending on workspace instructions and lab setup.
 
 ## Model Setups
 

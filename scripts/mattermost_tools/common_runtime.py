@@ -118,7 +118,7 @@ def load_control_values() -> dict[str, str]:
     runtime = planner_runtime_from_env(env)
     return {
         "team_name": env.get("OPENCLAW_MATTERMOST_TEAM_NAME", "openclaw").strip() or "openclaw",
-        "default_channel": env.get("OPENCLAW_MATTERMOST_CHANNEL_NAME", "triad-lab").strip() or "triad-lab",
+        "default_channel": env.get("OPENCLAW_MATTERMOST_CHANNEL_NAME", "hajimari-no-hiroba").strip() or "hajimari-no-hiroba",
         "OPENCLAW_MATTERMOST_OPERATOR_USERNAME": env.get("OPENCLAW_MATTERMOST_OPERATOR_USERNAME", "operator").strip() or "operator",
         "OPENCLAW_MATTERMOST_ADMIN_USERNAME": env.get("OPENCLAW_MATTERMOST_ADMIN_USERNAME", "ocadmin").strip() or "ocadmin",
         **runtime,

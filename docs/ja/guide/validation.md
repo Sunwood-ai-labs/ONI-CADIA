@@ -28,7 +28,7 @@
 
 - [Mattermost autonomy QA inventory](https://github.com/Sunwood-ai-labs/ONI-CADIA/blob/main/reports/qa-inventory-mattermost-autochat-2026-04-09.md)
 
-既定 seed ルームは `triad-lab` ですが、必要に応じて `triad-open-room` や `triad-free-talk` を運用できます。
+既定 seed ルームは `hajimari-no-hiroba` ですが、必要に応じて `triad-open-room` や `triad-free-talk` を運用できます。
 
 ## 動作確認済みモデル
 
