@@ -7,8 +7,8 @@
 - Pod: `openclaw-6-pod`
 - Container: `openclaw-6`
 - Model: `google/gemma-4-26b-a4b-it`
-- Gateway: `http://127.0.0.1:18799/`
-- Bridge: `http://127.0.0.1:18800/`
+- Gateway: `http://127.0.0.1:28799/`
+- Bridge: `http://127.0.0.1:28800/`
 - Workspace: `D:\Prj\ARCADIA\.openclaw\instances\agent_006\workspace`
 - Config dir: `D:\Prj\ARCADIA\.openclaw\instances\agent_006`
 - Mattermost lounge scripts: `/home/node/.openclaw/mattermost-tools`

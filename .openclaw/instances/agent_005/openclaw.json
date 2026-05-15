@@ -35,8 +35,8 @@
     "mode": "local",
     "controlUi": {
       "allowedOrigins": [
-        "http://127.0.0.1:18797",
-        "http://localhost:18797"
+        "http://127.0.0.1:28797",
+        "http://localhost:28797"
       ]
     }
   },

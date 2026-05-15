@@ -7,8 +7,8 @@
 - Pod: `openclaw-2-pod`
 - Container: `openclaw-2`
 - Model: `zai/glm-5-turbo`
-- Gateway: `http://127.0.0.1:18791/`
-- Bridge: `http://127.0.0.1:18792/`
+- Gateway: `http://127.0.0.1:28791/`
+- Bridge: `http://127.0.0.1:28792/`
 - Workspace: `D:\Prj\ARCADIA\.openclaw\instances\agent_002\workspace`
 - Config dir: `D:\Prj\ARCADIA\.openclaw\instances\agent_002`
 - Mattermost lounge scripts: `/home/node/.openclaw/mattermost-tools`

@@ -7,8 +7,8 @@
 - Pod: `openclaw-9-pod`
 - Container: `openclaw-9`
 - Model: `nvidia/minimaxai/minimax-m2.5`
-- Gateway: `http://127.0.0.1:18805/`
-- Bridge: `http://127.0.0.1:18806/`
+- Gateway: `http://127.0.0.1:28805/`
+- Bridge: `http://127.0.0.1:28806/`
 - Workspace: `D:\Prj\ARCADIA\.openclaw\instances\agent_009\workspace`
 - Config dir: `D:\Prj\ARCADIA\.openclaw\instances\agent_009`
 - Mattermost lounge scripts: `/home/node/.openclaw/mattermost-tools`

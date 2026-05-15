@@ -7,8 +7,8 @@
 - Pod: `openclaw-7-pod`
 - Container: `openclaw-7`
 - Model: `nvidia/moonshotai/kimi-k2-thinking`
-- Gateway: `http://127.0.0.1:18801/`
-- Bridge: `http://127.0.0.1:18802/`
+- Gateway: `http://127.0.0.1:28801/`
+- Bridge: `http://127.0.0.1:28802/`
 - Workspace: `D:\Prj\ARCADIA\.openclaw\instances\agent_007\workspace`
 - Config dir: `D:\Prj\ARCADIA\.openclaw\instances\agent_007`
 - Mattermost lounge scripts: `/home/node/.openclaw/mattermost-tools`
