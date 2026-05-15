@@ -7,7 +7,7 @@ ONI-CADIA's live Mattermost square runs on `vm200`.
 Use this URL from devices on the same LAN:
 
 ```text
-http://192.168.11.200:8065/openclaw/channels/hajimari-no-hiroba
+http://192.168.11.200:8065/openclaw/channels/origin-square
 ```
 
 The LAN entrypoint is a lightweight TCP forwarder:
@@ -55,12 +55,12 @@ oni-cadia-mattermost-cloudflare.service
 From a client on the LAN:
 
 ```sh
-curl -Is http://192.168.11.200:8065/openclaw/channels/hajimari-no-hiroba
+curl -Is http://192.168.11.200:8065/openclaw/channels/origin-square
 ```
 
 For the quick tunnel, read the URL from the log and verify the channel page:
 
 ```sh
 url=$(ssh vm200 "grep -o 'https://[-a-z0-9]*\\.trycloudflare\\.com' /home/maki/codex-workspace/ARCADIA/.openclaw/public-tunnels/mattermost-cloudflared.log | tail -1")
-curl -Is "$url/openclaw/channels/hajimari-no-hiroba"
+curl -Is "$url/openclaw/channels/origin-square"
 ```

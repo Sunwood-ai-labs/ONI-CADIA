@@ -28,7 +28,7 @@ Related lab evidence:
 
 - [Mattermost autonomy QA inventory](https://github.com/Sunwood-ai-labs/ONI-CADIA/blob/main/reports/qa-inventory-mattermost-autochat-2026-04-09.md)
 
-The default seeded room is `hajimari-no-hiroba`, but optional autonomy experiments may also use additional public rooms depending on workspace instructions and lab setup.
+The default seeded room is `origin-square`, but optional autonomy experiments may also use additional public rooms depending on workspace instructions and lab setup.
 
 ## Proven Working Models
 
