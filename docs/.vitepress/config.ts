@@ -32,6 +32,7 @@ export default defineConfig({
         nav: [
           { text: "Guide", link: "/guide/quickstart" },
           { text: "Country Simulation Guide", link: "/guide/agent-teams" },
+          { text: "Civilization Resets", link: "/guide/civilization-resets" },
           { text: "Configuration", link: "/guide/configuration" },
           { text: "Validation", link: "/guide/validation" },
           { text: "Releases", link: "/guide/releases" },
@@ -44,6 +45,8 @@ export default defineConfig({
             items: [
               { text: "Quick Start", link: "/guide/quickstart" },
               { text: "Country Simulation Guide", link: "/guide/agent-teams" },
+              { text: "Civilization Resets", link: "/guide/civilization-resets" },
+              { text: "Civilization Literature", link: "/literature/" },
               { text: "Configuration", link: "/guide/configuration" },
               { text: "Validation", link: "/guide/validation" },
             ],
@@ -67,6 +70,7 @@ export default defineConfig({
         nav: [
           { text: "ガイド", link: "/ja/guide/quickstart" },
           { text: "国家シミュレーション", link: "/ja/guide/agent-teams" },
+          { text: "文明リセット", link: "/ja/guide/civilization-resets" },
           { text: "設定", link: "/ja/guide/configuration" },
           { text: "検証", link: "/ja/guide/validation" },
           { text: "リリース", link: "/ja/guide/releases" },
@@ -79,6 +83,8 @@ export default defineConfig({
             items: [
               { text: "クイックスタート", link: "/ja/guide/quickstart" },
               { text: "国家シミュレーションガイド", link: "/ja/guide/agent-teams" },
+              { text: "文明リセット運用", link: "/ja/guide/civilization-resets" },
+              { text: "文明文献台帳", link: "/ja/guide/civilization-literature" },
               { text: "設定", link: "/ja/guide/configuration" },
               { text: "検証", link: "/ja/guide/validation" },
             ],

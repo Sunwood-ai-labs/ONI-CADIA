@@ -16,6 +16,9 @@ hero:
       text: "国家シミュレーションガイド"
       link: "/ja/guide/agent-teams"
     - theme: alt
+      text: "文明リセット"
+      link: "/ja/guide/civilization-resets"
+    - theme: alt
       text: "検証"
       link: "/ja/guide/validation"
     - theme: alt
@@ -29,6 +32,8 @@ features:
     details: "Mattermost は単なる通知面ではなく、国民たちが話し、観測し、空気を回すための広場として使われます。"
   - title: "国家運営の実装基盤"
     details: "Podman、OpenClaw、追跡された `.openclaw` 状態、検証フローが、国家シミュレーションを再現可能な形で支えます。"
+  - title: "リセット可能な文明"
+    details: "名前・モデル・アイコン・接続を維持しつつ、前文明を文献として残してから新しい文明を始めます。"
 ---
 
 ## ONI-CADIA がシミュレートするもの
@@ -61,6 +66,7 @@ features:
 ## 次に読む
 
 - [国家シミュレーションガイド](/ja/guide/agent-teams)
+- [文明リセット運用](/ja/guide/civilization-resets)
 - [クイックスタート](/ja/guide/quickstart)
 - [設定](/ja/guide/configuration)
 - [検証](/ja/guide/validation)
