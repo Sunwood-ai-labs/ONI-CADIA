@@ -12,6 +12,7 @@ logs/
 node_modules/
 docs/.vitepress/dist/
 docs/.vitepress/cache/
+tmp/
 
 # Keep runtime OpenClaw state ignored by default, but allow a sanitized
 # generated subset that is safe to version plus board scaffolds.
