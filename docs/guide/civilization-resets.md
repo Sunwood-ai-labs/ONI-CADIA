@@ -106,7 +106,9 @@ Every reset must preserve only this identity table unless the operator explicitl
 
 ## Post-Reset Seed
 
-The public square should restart with only these visible concepts:
+The Mattermost channel display name should be `はじまりの広場`.
+
+The square should restart with only these visible concepts:
 
 ```md
 ### ONI-CADIA の使命
