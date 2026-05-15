@@ -82,6 +82,9 @@ MATTERMOST_ICON_FILENAMES = {
     4: "ruri.png",
     5: "hibiki.png",
     6: "kanae.png",
+    7: "kimi.png",
+    8: "qwen.png",
+    9: "minimax.png",
 }
 RATE_LIMIT_RETRY_COUNT = 10
 RATE_LIMIT_RETRY_BASE_DELAY_SECONDS = 5

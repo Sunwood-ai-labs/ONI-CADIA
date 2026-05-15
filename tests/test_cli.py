@@ -598,12 +598,21 @@ class CliTests(unittest.TestCase):
         self.assertEqual(cli.mattermost_persona_username(9), "minimax")
 
     def test_mattermost_persona_avatar_files_exist(self) -> None:
-        self.assertEqual(cli.mattermost_persona_avatar_file(1).name, "iori.png")
-        self.assertEqual(cli.mattermost_persona_avatar_file(2).name, "tsumugi.png")
-        self.assertEqual(cli.mattermost_persona_avatar_file(3).name, "saku.png")
-        self.assertTrue(cli.mattermost_persona_avatar_file(1).exists())
-        self.assertTrue(cli.mattermost_persona_avatar_file(2).exists())
-        self.assertTrue(cli.mattermost_persona_avatar_file(3).exists())
+        expected = {
+            1: "iori.png",
+            2: "tsumugi.png",
+            3: "saku.png",
+            4: "ruri.png",
+            5: "hibiki.png",
+            6: "kanae.png",
+            7: "kimi.png",
+            8: "qwen.png",
+            9: "minimax.png",
+        }
+        for instance_id, filename in expected.items():
+            avatar_file = cli.mattermost_persona_avatar_file(instance_id)
+            self.assertEqual(avatar_file.name, filename)
+            self.assertTrue(avatar_file.exists())
 
 
 if __name__ == "__main__":
