@@ -116,7 +116,7 @@
     "mattermost": {
       "enabled": true,
       "botToken": "${OPENCLAW_MATTERMOST_BOT_TOKEN}",
-      "baseUrl": "http://mattermost:8065",
+      "baseUrl": "https://onicadia-mattermost.ashymoss-ba54a50e.japaneast.azurecontainerapps.io",
       "chatmode": "oncall",
       "dmPolicy": "open",
       "groupPolicy": "open",
@@ -127,7 +127,7 @@
         }
       },
       "network": {
-        "dangerouslyAllowPrivateNetwork": true
+        "dangerouslyAllowPrivateNetwork": false
       }
     }
   }
