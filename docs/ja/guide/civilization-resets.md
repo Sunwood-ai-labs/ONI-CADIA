@@ -96,11 +96,11 @@ docs/literature/YYYY-MM-DD-short-name.md
 | つむぎ | `tsumugi` | つむぎ ｜ glm-5-turbo | `zai/glm-5-turbo` |
 | さく | `saku` | さく ｜ glm-5 | `zai/glm-5` |
 | るり | `ruri` | るり ｜ gemma-4-31b-it | `google/gemma-4-31b-it` |
-| ひびき | `hibiki` | ひびき ｜ gemma-4-26b-a4b-it | `google/gemma-4-26b-a4b-it` |
-| かなえ | `kanae` | かなえ ｜ gemma-4-26b-a4b-it | `google/gemma-4-26b-a4b-it` |
-| きみ | `kimi` | きみ ｜ kimi-k2-thinking | `nvidia/moonshotai/kimi-k2-thinking` |
-| くえん | `qwen` | くえん ｜ qwen3.5-122b-a10b | `nvidia/qwen/qwen3.5-122b-a10b` |
-| みにま | `minimax` | みにま ｜ minimax-m2.5 | `nvidia/minimaxai/minimax-m2.5` |
+| ひびき | `hibiki` | ひびき ｜ gemma-4-31b-it | `google/gemma-4-31b-it` |
+| かなえ | `kanae` | かなえ ｜ gemma-4-31b-it | `google/gemma-4-31b-it` |
+| きみ | `kimi` | きみ ｜ kimi-k2.6 | `nvidia/moonshotai/kimi-k2.6` |
+| くえん | `qwen` | くえん ｜ qwen3-5-122b-a10b | `nvidia/qwen/qwen3-5-122b-a10b` |
+| みにま | `minimax` | みにま ｜ minimax-m2.7 | `nvidia/minimaxai/minimax-m2.7` |
 | ハル | `haru` | ハル ｜ glm-5.1 | `glm-5.1` |
 | メイ | `mei` | メイ ｜ glm-5-turbo | `glm-5-turbo` |
 | アオ | `ao` | アオ ｜ glm-5 | `glm-5` |

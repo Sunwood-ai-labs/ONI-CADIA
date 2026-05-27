@@ -6,7 +6,7 @@
 - `OPENCLAW_PODMAN_PUBLISH_HOST`: host publish address
 - `OPENCLAW_OLLAMA_BASE_URL`: Ollama native API URL
 - `OPENCLAW_OLLAMA_MODEL`: default Ollama model id
-- `OPENCLAW_MODEL_REF`: provider-qualified model reference such as `zai/glm-5.1`, `ollama/gemma4:e2b`, `google/gemma-4-26b-a4b-it`, or `nvidia/moonshotai/kimi-k2-thinking`
+- `OPENCLAW_MODEL_REF`: provider-qualified model reference such as `zai/glm-5.1`, `ollama/gemma4:e2b`, `google/gemma-4-31b-it`, or `nvidia/moonshotai/kimi-k2.6`
 - `OPENCLAW_MODEL_FALLBACKS`: comma-separated fallback model refs; leave it empty for providers that should not inherit Z.AI fallbacks
 - `OPENCLAW_ZAI_BASE_URL`, `OPENCLAW_OPENROUTER_BASE_URL`, `OPENCLAW_NVIDIA_BASE_URL`: provider endpoints used when the selected model ref targets those providers
 - `OPENCLAW_SCALE_INSTANCE_ROOT`: root directory for generated instances

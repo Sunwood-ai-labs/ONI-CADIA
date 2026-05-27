@@ -6,11 +6,11 @@
 - Instance: 6
 - Pod: `openclaw-6-pod`
 - Container: `openclaw-6`
-- Model: `google/gemma-4-26b-a4b-it`
+- Model: `google/gemma-4-31b-it`
 - Gateway: `http://127.0.0.1:28799/`
 - Bridge: `http://127.0.0.1:28800/`
-- Workspace: `D:\Prj\ARCADIA\.openclaw\instances\agent_006\workspace`
-- Config dir: `D:\Prj\ARCADIA\.openclaw\instances\agent_006`
+- Workspace: `/home/maki/codex-workspace/ARCADIA/.openclaw/instances/agent_006/workspace`
+- Config dir: `/home/maki/codex-workspace/ARCADIA/.openclaw/instances/agent_006`
 - Mattermost lounge scripts: `/home/node/.openclaw/mattermost-tools`
 
 ## 実務メモ

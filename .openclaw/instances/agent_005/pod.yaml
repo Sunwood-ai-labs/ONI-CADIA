@@ -55,7 +55,7 @@
       {
         "name": "openclaw-state",
         "hostPath": {
-          "path": "/mnt/d/Prj/ARCADIA/.openclaw/instances/agent_005",
+          "path": "/home/maki/codex-workspace/ARCADIA/.openclaw/instances/agent_005",
           "type": "DirectoryOrCreate"
         }
       }

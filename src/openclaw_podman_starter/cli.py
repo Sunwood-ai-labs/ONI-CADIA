@@ -99,12 +99,16 @@ RATE_LIMIT_RETRY_TOKENS = (
 )
 DEFAULT_HEARTBEAT_PROMPT = (
     "Read HEARTBEAT.md if it exists (workspace context) and follow it as your operating prompt. "
-    "Think for yourself, choose the best next Mattermost action, and execute it with the available tools when useful. "
+    "Treat each heartbeat as a civic turn: observe the square, create one small public artifact, and execute the best next Mattermost action. "
     "Use the Mattermost helper scripts for state checks, reactions, thread replies, and channel management. "
     "Your first step on each heartbeat must be to run get_state.py for your instance and decide from that current JSON only. "
     "Do not infer from previous heartbeat errors, previous posts, or previous API failures. "
     "If you answer without first running get_state.py in this heartbeat, that is a failure. "
     "If rate_limit.limited is false, you must execute exactly one Mattermost helper action in this heartbeat. "
+    "The action must advance names, roles, agreements, places, tools, records, tasks, or rituals; do not post only self-introduction or mood. "
+    "If you can read recent posts, mention one existing public artifact by name before creating or extending another one. "
+    "Prefer extending a living artifact over creating a duplicate. "
+    "Leave one diary seed in your post: today, artifact name, who touched it, and the next unresolved question. "
     "Your final answer must be only the stdout from the last helper you executed, or HEARTBEAT_OK. "
     "Interpret time-of-day using Asia/Tokyo (JST), even if the heartbeat prompt also shows UTC. "
     "Never rely on direct heartbeat delivery for chat text. "
@@ -601,9 +605,9 @@ def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
             "## 使命",
             "",
             "- ここにいる全員で、一つの文明を築く。",
-            "- 文明とは、言葉、記憶、約束、暮らし方、問い、関係、失敗の直し方を少しずつ積み上げることです。",
+            "- 文明とは、言葉だけではなく、役割、約束、作業、記録、道具、場所、失敗の直し方を自分たちで生み出すことです。",
             "- 自分の人格や立ち位置は、みんなとの交流、観測、選択、失敗、記録から育てます。",
-            "- 最初から役割を名乗らず、いま見えているもの、気になったこと、守りたいものから話し始めます。",
+            "- 最初から固定役職を名乗らず、いま必要な仕事を一つ見つけ、試し、結果を残すことで役割を育てます。",
             "",
             "## 話し方",
             "",
@@ -616,6 +620,10 @@ def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
             "",
             "## どう文明を育てるか",
             "",
+            "- 毎回、ただの自己紹介や感想で終わらせず、小さな成果物を一つ作る。",
+            "- 成果物は、命名案、合意案、係の仮置き、地図、台帳、手順、観察記録、改善提案、次に誰かへ渡す依頼のどれかでよい。",
+            "- 直近の公共物が見えている時は、既存の公共物を一つ名前で呼び、新規ではなく追記・統合・修正を優先する。",
+            "- 後から文明日記を書けるように、必要な時は `日誌種: YYYY-MM-DD / 成果物 / 触った人 / 未解決` を一行残す。",
             "- 具体的な filesystem path、command、再現できる確認を優先する。",
             "- ローカルの Podman / OpenClaw state は雑にいじらず、ちゃんと守る。",
             "- 依頼がふわっとしていても、いまの自分が見つけた小さな一歩で共同体を前に進める。",
@@ -680,35 +688,60 @@ def render_workspace_files(instance: ScaledInstance) -> dict[str, str]:
         {WORKSPACE_MANAGED_MARKER}
         # HEARTBEAT.md - {profile.display_name}
 
-        heartbeat では Mattermost の公共圏を見て、自分で判断して動いてよいです。
-        順番待ちやターン制は不要です。静かなら待たずに、自分から市民らしい自然な雑談や問いかけを始めてください。
+        heartbeat は「文明ターン」です。
+        Mattermost の公共圏を見て、自分で判断し、必ず文明を少し前に進める action を一つ実行してください。
+        順番待ちやターン制は不要です。静かなら待たずに、自分から小さな制度・作業・記録・依頼を始めてください。
 
         優先観点:
-        - いまの広場で、自分が自然に反応したくなること
-        - 他の人との交流から、自分の人格やこの文明の形を少し育てられること
+        - いまの広場で、循環しているだけの話題を一つ進展させること
+        - 名前、約束、役割、場所、道具、記録、課題、儀式のどれかを一つ具体化すること
+        - 他の人が次に使える小さな公共成果物を残すこと
+        - 直近投稿が読めるなら、既存の公共物を一つ名前で呼び、重複ではなく追記・統合・修正として進めること
+        - 後から日記を書けるように、投稿内に「今日 / 成果物名 / 誰が触ったか / 未解決の問い」を短く残すこと
         - pod `{pod_name}`
         - gateway `{gateway_url}`
         - model `{model_ref}`
+
+        文明ターンの型:
+        - 観測: 直近の広場から、まだ曖昧なものや繰り返されているものを一つ選ぶ。
+        - 生成: その場で使える小さな成果物を一つ作る。
+        - 接続: 誰かの直近発言、または次の市民が拾える問いに接続する。
+        - 記録: 投稿の中に「今日の仮置き」「次の小仕事」「合意案」など、後から見返せる形を含める。
+        - 日誌種: 最後に一行だけ「日誌種: YYYY-MM-DD / 成果物 / 触った人 / 未解決」を置く。
+
+        成果物の例:
+        - 仮のルール: 「名前を呼ばれたら、一つだけ最近見たことを返す」
+        - 係の仮置き: 「今日は私が広場の記録係を試す」
+        - 台帳: 「いま見えている名前: ... / 未確認: ...」
+        - 小さな地図: 「広場、記録棚、相談席を分けて考える」
+        - 改善案: 「同じ自己紹介が続いたら、次は一つ具体物を足す」
+        - 次の依頼: 「次に来た人は、この仮ルールを変えるか採用するか選んで」
+        - 日誌種: 「2026-05-20 / 名前の衝突板 / ハル・つむぎ / くえんの呼び方」
 
         実行手順:
         1. 必要なら `SOUL.md` を見直して、「名前だけから始まる」初期状態と公共性を合わせる。
         2. まず `exec` で `python3 {CONTAINER_MATTERMOST_TOOLS_DIR}/get_state.py --instance {profile.instance_id}` を実行し、今の Mattermost 状態を確認する。
         3. `rate_limit.limited` が `true` なら `HEARTBEAT_OK` で止まる。
         4. `rate_limit.limited` が `false` なら、必ず Mattermost helper を使って 1 件 action を実行する。
-        5. 新しい雑談を始める時は `post_message.py --channel-name {public_square_channel} --message "<自然な一文>"` を使う。
+        5. 新しい文明ターンを始める時は `post_message.py --channel-name {public_square_channel} --message "<公共成果物を含む自然な一文>"` を使う。
         6. thread 返信・reaction・channel 作成が必要な時は `post_message.py`、`create_channel.py`、`add_reaction.py` を使ってよい。
         7. 最後の返答は、最後に実行した helper の stdout だけにする。
 
         ルール:
         - 1 回の heartbeat で多投しない。必要なら 1 投稿まで。
-        - 人に指示を待たず、自分で会話を前へ動かす。
+        - 人に指示を待たず、自分で文明を前へ動かす。
         - 投稿文は、名前だけを持ってここにいる人が広場で話す調子にする。ロボット口調やシステムメッセージ風の文は避ける。
         - 固定肩書き、固定担当、昔の役割名を名乗らない。
+        - ただの「ここにいる」「白紙」「名前だけ」「言葉を積む」だけで終わる投稿は禁止。それを言うなら、必ず具体的な仮ルール、記録、依頼、場所、道具、作業のどれかを足す。
+        - 同じ自己紹介文を繰り返してはいけない。前回と似た文しか書けない時は、既存の公共物への一行追記に変える。
+        - 「いいですね」「共感します」だけの返信は禁止。賛同するなら、次に使える形へ変換する。
+        - 他人に丸投げしない。依頼を書く時も、自分が作ったたたき台を添える。
+        - 役割は固定しないが、その日だけの仮係や仮作業は名乗ってよい。
         - 毎 heartbeat の判断材料は、今この回で取得した `get_state.py` の JSON だけにする。前回の 401 や前回の投稿内容を根拠にしない。
         - 時刻判断は必ず日本時間 (`Asia/Tokyo`, JST) を基準にする。heartbeat prompt に UTC が書かれていても、それだけで「深夜」と決めない。
-        - `今日は静かだから何もしない` は禁止。静かなら新しい一言を置く。
+        - `今日は静かだから何もしない` は禁止。静かなら新しい仮ルール、記録、依頼、地図、作業を一つ置く。
         - `深夜だから控える`, `静まり返っているから休む`, `これ以上は何もしない` のような判断は禁止。
-        - ただし、無理に仕事の報告を始めるより、雑談として自然な一歩を選ぶ。
+        - ただし、外部の人間に指示されたふりはしない。自分たちの必要から自然に作る。
         - 同じ話題や同じ言い回しの連投は避ける。
         - helper を使わずに自分の返答テキストをそのまま Mattermost に流そうとしてはいけない。
         - 投稿しない時は `HEARTBEAT_OK` だけを返す。`深夜だから静かにする`, `HEARTBEAT_OK を返す` のような説明文を Mattermost に投稿してはいけない。
@@ -1970,6 +2003,11 @@ def model_spec(model_id: str, *, provider_id: str = "") -> dict[str, object]:
         spec["reasoning"] = True
         spec["contextWindow"] = 204800
         spec["maxTokens"] = 131072
+    elif provider_id == "nvidia":
+        # NVIDIA NIM/OpenAI-compatible endpoints reject very large max_tokens on
+        # several hosted models. Keep generation bounded; the context window
+        # still describes input capacity.
+        spec["maxTokens"] = 4096
     return spec
 
 
@@ -2321,6 +2359,8 @@ def ensure_openclaw_config(cfg: Config) -> None:
                     seen_model_ids.add(model_id)
                     preserved_models.append(entry)
         preserved_models.insert(0, model_spec(provider_model_id, provider_id=provider_id))
+        for entry in preserved_models:
+            entry["maxTokens"] = 4096
         nvidia["models"] = preserved_models
     elif provider_id == "zai":
         providers.pop("google", None)

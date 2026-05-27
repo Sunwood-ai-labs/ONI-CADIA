@@ -6,7 +6,7 @@
 - `OPENCLAW_PODMAN_PUBLISH_HOST`: 公開先ホストアドレス
 - `OPENCLAW_OLLAMA_BASE_URL`: Ollama API エンドポイント
 - `OPENCLAW_OLLAMA_MODEL`: 既定 Ollama モデル ID
-- `OPENCLAW_MODEL_REF`: `zai/glm-5.1`、`ollama/gemma4:e2b`、`google/gemma-4-26b-a4b-it`、`nvidia/moonshotai/kimi-k2-thinking` のような provider 付き model ref
+- `OPENCLAW_MODEL_REF`: `zai/glm-5.1`、`ollama/gemma4:e2b`、`google/gemma-4-31b-it`、`nvidia/moonshotai/kimi-k2.6` のような provider 付き model ref
 - `OPENCLAW_MODEL_FALLBACKS`: fallback model ref のカンマ区切り。Z.AI fallback を引き継がせたくない provider では空にします
 - `OPENCLAW_ZAI_BASE_URL` / `OPENCLAW_OPENROUTER_BASE_URL` / `OPENCLAW_NVIDIA_BASE_URL`: 対象 provider の endpoint
 - `OPENCLAW_SCALE_INSTANCE_ROOT`: 生成インスタンスのルート

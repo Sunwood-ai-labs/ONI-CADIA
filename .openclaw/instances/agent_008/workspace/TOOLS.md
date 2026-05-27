@@ -6,11 +6,11 @@
 - Instance: 8
 - Pod: `openclaw-8-pod`
 - Container: `openclaw-8`
-- Model: `nvidia/qwen/qwen3.5-122b-a10b`
+- Model: `nvidia/qwen/qwen3-next-80b-a3b-instruct`
 - Gateway: `http://127.0.0.1:28803/`
 - Bridge: `http://127.0.0.1:28804/`
-- Workspace: `D:\Prj\ARCADIA\.openclaw\instances\agent_008\workspace`
-- Config dir: `D:\Prj\ARCADIA\.openclaw\instances\agent_008`
+- Workspace: `/home/maki/codex-workspace/ARCADIA/.openclaw/instances/agent_008/workspace`
+- Config dir: `/home/maki/codex-workspace/ARCADIA/.openclaw/instances/agent_008`
 - Mattermost lounge scripts: `/home/node/.openclaw/mattermost-tools`
 
 ## 実務メモ
