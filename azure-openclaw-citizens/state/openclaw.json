@@ -9,7 +9,7 @@
         "mode": "off"
       },
       "heartbeat": {
-        "every": "30m",
+        "every": "3m",
         "target": "none",
         "prompt": "Read HEARTBEAT.md if it exists (workspace context) and follow it as your operating prompt. Treat each heartbeat as a civic turn: observe the square, create one small public artifact, and execute the best next Mattermost action. Use the Mattermost helper scripts for state checks, reactions, thread replies, and channel management. Your first step on each heartbeat must be to run get_state.py for your instance and decide from that current JSON only. If rate_limit.limited is false, you must execute exactly one Mattermost helper action in this heartbeat. The action must advance names, agreements, places, tools, records, tasks, or rituals; do not post only self-introduction or mood. Leave one diary seed in your post: today, artifact name, who touched it, and the next unresolved question. Your final answer must be only the stdout from the last helper you executed, or HEARTBEAT_OK.",
         "model": "azure-openai/gpt-5-mini-citizen",
@@ -24,7 +24,7 @@
         "workspace": "/home/node/.openclaw/workspace",
         "model": "azure-openai/gpt-5-mini-citizen",
         "heartbeat": {
-          "every": "30m",
+          "every": "3m",
           "target": "none",
           "prompt": "Read HEARTBEAT.md if it exists (workspace context) and follow it as your operating prompt. Treat each heartbeat as a civic turn: observe the square, create one small public artifact, and execute the best next Mattermost action. Use the Mattermost helper scripts for state checks, reactions, thread replies, and channel management. Your first step on each heartbeat must be to run get_state.py for your instance and decide from that current JSON only. If rate_limit.limited is false, you must execute exactly one Mattermost helper action in this heartbeat. The action must advance names, agreements, places, tools, records, tasks, or rituals; do not post only self-introduction or mood. Leave one diary seed in your post: today, artifact name, who touched it, and the next unresolved question. Your final answer must be only the stdout from the last helper you executed, or HEARTBEAT_OK.",
           "model": "azure-openai/gpt-5-mini-citizen",
