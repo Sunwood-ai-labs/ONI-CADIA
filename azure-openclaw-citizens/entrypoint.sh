@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+set -eu
+
+STATE_DIR="${OPENCLAW_STATE_DIR:-/home/node/.openclaw}"
+mkdir -p "$STATE_DIR"
+cp -R /opt/oni-cadia-openclaw-state/. "$STATE_DIR/"
+
+cat > "$STATE_DIR/.env" <<EOF
+OPENAI_API_KEY=${AZURE_OPENAI_API_KEY:-}
+AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY:-}
+OPENCLAW_MATTERMOST_BOT_TOKEN=${OPENCLAW_MATTERMOST_BOT_TOKEN:-}
+OPENCLAW_MATTERMOST_TEAM_NAME=${OPENCLAW_MATTERMOST_TEAM_NAME:-openclaw}
+OPENCLAW_MATTERMOST_CHANNEL_NAME=${OPENCLAW_MATTERMOST_CHANNEL_NAME:-origin-square}
+OPENCLAW_MODEL_REF=${OPENCLAW_MODEL_REF:-azure-openai/gpt-5-mini-citizen}
+EOF
+
+exec openclaw gateway --allow-unconfigured

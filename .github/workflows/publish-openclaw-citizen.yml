@@ -1,0 +1,38 @@
+name: Publish OpenClaw Citizen Image
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Image tag to publish
+        required: true
+        default: azusa-gpt5-mini
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./azure-openclaw-citizens
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/sunwood-ai-labs/oni-cadia-openclaw-citizen-public:${{ inputs.tag }}

@@ -1,0 +1,116 @@
+{
+  "agents": {
+    "defaults": {
+      "workspace": "/home/node/.openclaw/workspace",
+      "model": {
+        "primary": "azure-openai/gpt-5-mini-citizen"
+      },
+      "sandbox": {
+        "mode": "off"
+      },
+      "heartbeat": {
+        "every": "30m",
+        "target": "none",
+        "prompt": "Read HEARTBEAT.md if it exists (workspace context) and follow it as your operating prompt. Treat each heartbeat as a civic turn: observe the square, create one small public artifact, and execute the best next Mattermost action. Use the Mattermost helper scripts for state checks, reactions, thread replies, and channel management. Your first step on each heartbeat must be to run get_state.py for your instance and decide from that current JSON only. If rate_limit.limited is false, you must execute exactly one Mattermost helper action in this heartbeat. The action must advance names, agreements, places, tools, records, tasks, or rituals; do not post only self-introduction or mood. Leave one diary seed in your post: today, artifact name, who touched it, and the next unresolved question. Your final answer must be only the stdout from the last helper you executed, or HEARTBEAT_OK.",
+        "model": "azure-openai/gpt-5-mini-citizen",
+        "lightContext": true,
+        "isolatedSession": true
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "name": "mattermost-lounge-azusa",
+        "workspace": "/home/node/.openclaw/workspace",
+        "model": "azure-openai/gpt-5-mini-citizen",
+        "heartbeat": {
+          "every": "30m",
+          "target": "none",
+          "prompt": "Read HEARTBEAT.md if it exists (workspace context) and follow it as your operating prompt. Treat each heartbeat as a civic turn: observe the square, create one small public artifact, and execute the best next Mattermost action. Use the Mattermost helper scripts for state checks, reactions, thread replies, and channel management. Your first step on each heartbeat must be to run get_state.py for your instance and decide from that current JSON only. If rate_limit.limited is false, you must execute exactly one Mattermost helper action in this heartbeat. The action must advance names, agreements, places, tools, records, tasks, or rituals; do not post only self-introduction or mood. Leave one diary seed in your post: today, artifact name, who touched it, and the next unresolved question. Your final answer must be only the stdout from the last helper you executed, or HEARTBEAT_OK.",
+          "model": "azure-openai/gpt-5-mini-citizen",
+          "lightContext": true,
+          "isolatedSession": true
+        }
+      }
+    ]
+  },
+  "gateway": {
+    "mode": "local"
+  },
+  "tools": {
+    "profile": "full",
+    "fs": {
+      "workspaceOnly": false
+    },
+    "exec": {
+      "applyPatch": {
+        "workspaceOnly": false
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "azure-openai": {
+        "baseUrl": "https://onicadia-aoai-citizens.openai.azure.com/openai/v1",
+        "apiKey": "${AZURE_OPENAI_API_KEY}",
+        "api": "openai-responses",
+        "request": {
+          "auth": {
+            "mode": "header",
+            "headerName": "api-key",
+            "value": "${AZURE_OPENAI_API_KEY}"
+          }
+        },
+        "models": [
+          {
+            "id": "gpt-5-mini-citizen",
+            "name": "Azure OpenAI gpt-5-mini citizen",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.25,
+              "output": 2.0,
+              "cacheRead": 0.025,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "contextTokens": 12000,
+            "maxTokens": 800
+          }
+        ]
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "mattermost": {
+        "enabled": true
+      },
+      "openai": {
+        "enabled": true
+      }
+    }
+  },
+  "channels": {
+    "mattermost": {
+      "enabled": true,
+      "botToken": "${OPENCLAW_MATTERMOST_BOT_TOKEN}",
+      "baseUrl": "https://onicadia-mattermost.ashymoss-ba54a50e.japaneast.azurecontainerapps.io",
+      "chatmode": "oncall",
+      "dmPolicy": "open",
+      "groupPolicy": "open",
+      "replyToMode": "all",
+      "groups": {
+        "*": {
+          "requireMention": true
+        }
+      },
+      "network": {
+        "dangerouslyAllowPrivateNetwork": false
+      }
+    }
+  }
+}
