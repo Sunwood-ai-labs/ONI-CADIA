@@ -35,6 +35,7 @@ HANDLES = {
     7: "kimi",
     8: "qwen",
     9: "minimax",
+    10: "azusa",
 }
 
 CHANNEL_PREFIX = "triad-"
