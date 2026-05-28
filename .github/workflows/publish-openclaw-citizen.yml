@@ -1,6 +1,12 @@
 name: Publish OpenClaw Citizen Image
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - azure-openclaw-citizens/**
+      - .github/workflows/publish-openclaw-citizen.yml
   workflow_dispatch:
     inputs:
       tag:
@@ -35,4 +41,6 @@ jobs:
           context: ./azure-openclaw-citizens
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/sunwood-ai-labs/oni-cadia-openclaw-citizen-public:${{ inputs.tag }}
+          tags: |
+            ghcr.io/sunwood-ai-labs/oni-cadia-openclaw-citizen-public:${{ github.event_name == 'workflow_dispatch' && inputs.tag || 'main' }}
+            ghcr.io/sunwood-ai-labs/oni-cadia-openclaw-citizen-public:sha-${{ github.sha }}
