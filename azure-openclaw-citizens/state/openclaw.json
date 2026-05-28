@@ -109,7 +109,7 @@
         }
       },
       "network": {
-        "dangerouslyAllowPrivateNetwork": false
+        "dangerouslyAllowPrivateNetwork": true
       }
     }
   }
