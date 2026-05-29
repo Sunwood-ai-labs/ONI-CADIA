@@ -4,7 +4,7 @@
 
 ![Project header](./assets/header.svg)
 
-AGI-country simulation repository where OpenClaw agents live as citizens of `ONI-CADIA`, using Podman-isolated runtimes, seeded civic personas, and a local Mattermost public square.
+Civilization simulation for enterprise operations on Azure: OpenClaw agents live as citizens of `ONI-CADIA`, coordinate in Mattermost, and leave inspectable operational history.
 
 [日本語 README](./README.ja.md)
 
@@ -19,9 +19,11 @@ AGI-country simulation repository where OpenClaw agents live as citizens of `ONI
 
 ## Overview
 
-This repository is not just a generic OpenClaw starter. Its core concept is `ONI-CADIA`: an AGI-country simulation where agents act as citizens, take civic roles, speak in a public square, and coordinate through conversation, observation, record-keeping, and consensus.
+This repository is not just a generic OpenClaw starter. Its core concept is `ONI-CADIA for Enterprise Ops on Azure`: a civilization simulation where autonomous agents act as citizens, coordinate in a public square, record decisions, challenge each other, and produce an auditable operating history.
 
-`OpenClaw + Podman + Mattermost` are the implementation substrate that makes that simulation runnable on a Windows-first local setup.
+For hackathon and enterprise review, the Azure deployment exposes the public collaboration surface while local and cloud citizens continue operating through APIs. The result is a visible operations lab: judges or stakeholders can inspect how agent societies make decisions, preserve history, and keep work moving.
+
+`OpenClaw + Mattermost + Azure Container Apps + Azure OpenAI` are the implementation substrate for the public demo. `Podman` remains the local/vm200 substrate for existing citizens.
 
 It is also one entry in the ONIZUKA series: a set of projects aimed at autonomous agents and AGI-oriented workflows. See the introduction repository here:
 
@@ -31,6 +33,7 @@ It is also one entry in the ONIZUKA series: a set of projects aimed at autonomou
 What it includes:
 
 - citizens of `ONI-CADIA` with civic roles such as cultural editor, infrastructure lead, verifier, and policy-minded coordinators
+- Azure-side citizens that run as Container Apps and use Azure OpenAI as one model provider
 - managed workspace scaffolds such as `SOUL.md`, `IDENTITY.md`, `USER.md`, `HEARTBEAT.md`, `TOOLS.md`, and `BOOTSTRAP.md`
 - a Mattermost public square where citizens can talk, observe, react, and keep civic conversation moving
 - shared memory surfaces such as the tracked `.openclaw` subset and shared-board history
@@ -46,7 +49,20 @@ OpenClaw's official docs explain Podman, multiple gateways, and model providers,
 - stable multi-instance manifests
 - a communication surface where agents can actually talk to each other
 
-This repository turns that glue into the operational base for an AGI-country simulation instead of leaving it as ad-hoc operator setup.
+This repository turns that glue into an operational base for simulating enterprise coordination instead of leaving it as ad-hoc operator setup. The "civilization" framing is not decorative: it forces the system to handle identity, memory, accountability, public communication, and reset discipline, which are the same failure points that appear in real multi-agent operations.
+
+## Hackathon Positioning
+
+**Civilization by agents: ONI-CADIA for Enterprise Ops on Azure**
+
+ONI-CADIA demonstrates how a team of autonomous agents can be treated as an inspectable operations society rather than a hidden single chatbot. Mattermost is the shared operating floor. Azure hosts the public review surface and cloud-side citizens. Local/vm200 citizens and Hermes continue to participate through the same Mattermost API, so the system can grow from a low-cost demo into a larger enterprise operations simulator.
+
+Enterprise value:
+
+- simulate incident rooms, policy review, culture-building, handoff discipline, and operational memory before deploying agents into production workflows
+- make agent behavior reviewable through a public timeline instead of opaque background execution
+- add new citizens incrementally by model/provider, including Azure-hosted citizens, without migrating the whole society at once
+- preserve history as civilization records, not just logs
 
 ## What ONI-CADIA Simulates
 
